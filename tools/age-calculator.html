@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-birthday-cake text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Age <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate your exact age in years, months, days, hours, and even seconds based on your birth date.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Input Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Your Birth Date</h2>
+                    <form id="age-calculator-form" class="space-y-6">
+                        <div>
+                            <label for="birth-date" class="block text-white mb-2">Birth Date</label>
+                            <input type="date" id="birth-date" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" required>
+                        </div>
+                        <div>
+                            <label for="birth-time" class="block text-white mb-2">Birth Time (optional)</label>
+                            <input type="time" id="birth-time" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                        </div>
+                        <div>
+                            <label for="calculation-date" class="block text-white mb-2">Calculate Age As Of (defaults to today)</label>
+                            <input type="date" id="calculation-date" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                        </div>
+                        <button type="button" onclick="calculateAge()" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105">Calculate Age</button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Your Age</h2>
+                    <div id="age-result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10">
+                        <p class="text-gray-300 text-center">Enter your birth date to see your age calculation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">How It Works</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Enter Your Birth Date</h3>
+                            <p class="text-gray-300">Input your date of birth using the date picker. For more precise calculations, you can also add your birth time.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Select Calculation Date (Optional)</h3>
+                            <p class="text-gray-300">By default, your age will be calculated as of today. You can also select a different date to calculate your age at that specific point in time.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">View Detailed Results</h3>
+                            <p class="text-gray-300">After clicking the Calculate button, you'll see your age broken down into years, months, days, hours, minutes, and seconds. The calculator accounts for leap years and varying month lengths.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>How accurate is this age calculator?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            This age calculator is highly accurate. It takes into account leap years, different month lengths, and can calculate down to the second if you provide your birth time. The calculations follow standard calendar rules and time calculations.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Why might my age be different from what I expected?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Age calculations can sometimes be confusing because of how we commonly express age in everyday language. For example, someone might say they're "25 years old" even if they're 25 years and 11 months. Our calculator provides the exact breakdown, which might differ from how you typically think about your age.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Can I calculate my age at a future date?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Yes! You can use the "Calculate Age As Of" field to select any date in the future. This is useful for determining how old you'll be on a specific future date, such as a graduation, retirement, or any other milestone.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Is my birth data stored or shared?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            No, all calculations are performed locally in your browser. We don't store, collect, or share any of your personal information, including your birth date. Your privacy is important to us.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Container -->
+        <div class="ad-container mb-12">
+            <p class="text-center text-gray-400 mb-2">Advertisement</p>
+            <div class="h-20 md:h-40 bg-gray-800 bg-opacity-50 flex items-center justify-center rounded-lg">
+                <p class="text-gray-400">Google AdSense Banner</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300"><i class="fas fa-envelope mr-2 text-yellow-400"></i> contact@calchub.com</li>
+                        <li class="text-gray-300"><i class="fas fa-phone mr-2 text-yellow-400"></i> +1 (123) 456-7890</li>
+                        <li class="text-gray-300"><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i> 123 Calculator St, Math City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8 text-center">
+                <p class="text-gray-300">&copy; <span id="current-year"></span> CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+        const mobileDropdown = document.getElementById('mobile-dropdown');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileDropdownButton.addEventListener('click', () => {
+            mobileDropdown.classList.toggle('hidden');
+        });
+
+        // Age Calculator Function
+        function calculateAge() {
+            const birthDateInput = document.getElementById('birth-date').value;
+            const birthTimeInput = document.getElementById('birth-time').value || '00:00';
+            let calculationDateInput = document.getElementById('calculation-date').value;
+            
+            if (!birthDateInput) {
+                alert('Please enter your birth date');
+                return;
+            }
+            
+            // If no calculation date is provided, use today
+            if (!calculationDateInput) {
+                const today = new Date();
+                const year = today.getFullYear();
+                const month = String(today.getMonth() + 1).padStart(2, '0');
+                const day = String(today.getDate()).padStart(2, '0');
+                calculationDateInput = `${year}-${month}-${day}`;
+            }
+            
+            // Create Date objects
+            const birthDateTime = new Date(`${birthDateInput}T${birthTimeInput}`);
+            const calculationDateTime = new Date(`${calculationDateInput}T${birthTimeInput}`);
+            
+            // Check if dates are valid
+            if (isNaN(birthDateTime.getTime()) || isNaN(calculationDateTime.getTime())) {
+                alert('Please enter valid dates');
+                return;
+            }
+            
+            // Check if birth date is in the future
+            if (birthDateTime > new Date()) {
+                alert('Birth date cannot be in the future');
+                return;
+            }
+            
+            // Check if calculation date is before birth date
+            if (calculationDateTime < birthDateTime) {
+                alert('Calculation date cannot be before birth date');
+                return;
+            }
+            
+            // Calculate difference in milliseconds
+            const diffMs = calculationDateTime - birthDateTime;
+            
+            // Calculate years, months, days
+            let years = calculationDateTime.getFullYear() - birthDateTime.getFullYear();
+            let months = calculationDateTime.getMonth() - birthDateTime.getMonth();
+            let days = calculationDateTime.getDate() - birthDateTime.getDate();
+            
+            // Adjust months and years if needed
+            if (days < 0) {
+                months--;
+                // Get the last day of the previous month
+                const lastDayOfLastMonth = new Date(
+                    calculationDateTime.getFullYear(),
+                    calculationDateTime.getMonth(),
+                    0
+                ).getDate();
+                days += lastDayOfLastMonth;
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Calculate hours, minutes, seconds
+            const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+            
+            // Calculate total values
+            const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const totalMinutes = Math.floor(diffMs / (1000 * 60));
+            const totalSeconds = Math.floor(diffMs / 1000);
+            
+            // Format the result
+            const resultHTML = `
+                <div class="space-y-4">
+                    <div class="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg p-4 text-center">
+                        <h3 class="text-2xl font-bold text-white">${years} years, ${months} months, ${days} days</h3>
+                        <p class="text-white opacity-80">Your precise age</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg text-center">
+                            <p class="text-xl font-semibold text-white">${totalDays.toLocaleString()}</p>
+                            <p class="text-sm text-gray-300">Total Days</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg text-center">
+                            <p class="text-xl font-semibold text-white">${totalHours.toLocaleString()}</p>
+                            <p class="text-sm text-gray-300">Total Hours</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg text-center">
+                            <p class="text-xl font-semibold text-white">${totalMinutes.toLocaleString()}</p>
+                            <p class="text-sm text-gray-300">Total Minutes</p>
+                        </div>
+                        <div class="bg-white bg-opacity-10 p-3 rounded-lg text-center">
+                            <p class="text-xl font-semibold text-white">${totalSeconds.toLocaleString()}</p>
+                            <p class="text-sm text-gray-300">Total Seconds</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                        <h4 class="text-white font-semibold mb-2">Detailed Breakdown:</h4>
+                        <p class="text-gray-300">Years: ${years}</p>
+                        <p class="text-gray-300">Months: ${months}</p>
+                        <p class="text-gray-300">Days: ${days}</p>
+                        <p class="text-gray-300">Hours: ${hours}</p>
+                        <p class="text-gray-300">Minutes: ${minutes}</p>
+                        <p class="text-gray-300">Seconds: ${seconds}</p>
+                    </div>
+                    
+                    <button onclick="copyToClipboard('${years} years, ${months} months, ${days} days (${totalDays.toLocaleString()} days total)')" class="w-full bg-white bg-opacity-10 hover:bg-opacity-20 text-white py-2 rounded-lg transition-all duration-300">
+                        <i class="fas fa-copy mr-2"></i> Copy Result
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('age-result').innerHTML = resultHTML;
+            
+            // Save to calculation history
+            saveToHistory(
+                'Age Calculator',
+                `Birth: ${birthDateInput} | Calculate as of: ${calculationDateInput}`,
+                `${years} years, ${months} months, ${days} days`
+            );
+        }
+    </script>
+</body>
+</html>

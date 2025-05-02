@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/scientific-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-square-root-alt text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Scientific <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Perform advanced mathematical calculations with this comprehensive scientific calculator.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-2xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <!-- Calculator Display -->
+            <div class="mb-4">
+                <div id="calc-history" class="text-right text-gray-400 h-6 overflow-hidden"></div>
+                <div id="calc-display" class="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-right text-white text-3xl font-semibold h-16 flex items-center justify-end overflow-hidden">0</div>
+            </div>
+
+            <!-- Mode Toggle -->
+            <div class="flex justify-between mb-4">
+                <div class="flex space-x-2">
+                    <button id="deg-mode" class="bg-indigo-600 text-white px-3 py-1 rounded-lg text-sm font-semibold active">DEG</button>
+                    <button id="rad-mode" class="bg-indigo-400 text-white px-3 py-1 rounded-lg text-sm font-semibold">RAD</button>
+                </div>
+                <div>
+                    <button id="memory-display" class="bg-gray-600 text-white px-3 py-1 rounded-lg text-sm font-semibold hidden">M</button>
+                </div>
+            </div>
+
+            <!-- Calculator Buttons -->
+            <div class="grid grid-cols-5 gap-2">
+                <!-- Row 1 - Memory and Functions -->
+                <button class="calc-btn memory-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-action="mc">MC</button>
+                <button class="calc-btn memory-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-action="mr">MR</button>
+                <button class="calc-btn memory-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-action="m+">M+</button>
+                <button class="calc-btn memory-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-action="m-">M-</button>
+                <button class="calc-btn memory-btn bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-action="ms">MS</button>
+
+                <!-- Row 2 - Functions -->
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="sin">sin</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="cos">cos</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="tan">tan</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="log">log</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="ln">ln</button>
+
+                <!-- Row 3 - Functions -->
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="asin">sin<sup>-1</sup></button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="acos">cos<sup>-1</sup></button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="atan">tan<sup>-1</sup></button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="10^x">10<sup>x</sup></button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="e^x">e<sup>x</sup></button>
+
+                <!-- Row 4 - Special Functions -->
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="sqrt">√</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="square">x²</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="cube">x³</button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="pow">x<sup>y</sup></button>
+                <button class="calc-btn function-btn bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="1/x">1/x</button>
+
+                <!-- Row 5 - Constants and Clear -->
+                <button class="calc-btn constant-btn bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-const="pi">π</button>
+                <button class="calc-btn constant-btn bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-const="e">e</button>
+                <button class="calc-btn function-btn bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="abs">|x|</button>
+                <button class="calc-btn function-btn bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 text-sm rounded-lg transition-colors" data-func="fact">n!</button>
+                <button class="calc-btn calc-clear bg-red-500 hover:bg-red-600 text-white font-bold py-2 text-sm rounded-lg transition-colors">C</button>
+
+                <!-- Row 6 - Numbers and Operations -->
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">7</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">8</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">9</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="/">÷</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="backspace"><i class="fas fa-backspace"></i></button>
+
+                <!-- Row 7 -->
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">4</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">5</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">6</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="*">×</button>
+                <button class="calc-btn function-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-func="mod">mod</button>
+
+                <!-- Row 8 -->
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">1</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">2</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">3</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="-">−</button>
+                <button class="calc-btn function-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-func="(">(</button>
+
+                <!-- Row 9 -->
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="+/-">±</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">0</button>
+                <button class="calc-btn calc-number bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 rounded-lg transition-colors">.</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="+">+</button>
+                <button class="calc-btn function-btn bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-func=")">)</button>
+
+                <!-- Row 10 - Equals -->
+                <button class="calc-btn calc-equals bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-colors col-span-5">=</button>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">How to Use</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Basic Operations</h3>
+                            <p class="text-gray-300">Use the number pad and operation buttons (+, −, ×, ÷) for basic arithmetic calculations.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Scientific Functions</h3>
+                            <p class="text-gray-300">Access trigonometric functions (sin, cos, tan), logarithms (log, ln), exponents, and more using the function buttons.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Memory Functions</h3>
+                            <p class="text-gray-300">Store and recall values using memory functions (MC, MR, M+, M-, MS) for complex calculations.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">4</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Angle Mode</h3>
+                            <p class="text-gray-300">Switch between degrees (DEG) and radians (RAD) for trigonometric calculations using the mode toggle.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-square-root-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Advanced Functions</h3>
+                    </div>
+                    <p class="text-gray-300">Access a wide range of scientific functions including trigonometry, logarithms, exponents, factorials, and more.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-memory text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Memory Functions</h3>
+                    </div>
+                    <p class="text-gray-300">Store and recall values with memory functions, making complex multi-step calculations easier.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-exchange-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Angle Mode Toggle</h3>
+                    </div>
+                    <p class="text-gray-300">Switch between degrees and radians for trigonometric calculations with a simple toggle.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-history text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Calculation History</h3>
+                    </div>
+                    <p class="text-gray-300">View your previous operation while you work, making it easy to track complex calculations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>How accurate are the trigonometric functions?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Our scientific calculator uses JavaScript's built-in Math functions, which provide high accuracy for most calculations. For extremely precise scientific work, specialized software may be more appropriate, but this calculator is suitable for educational and general use.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>What's the difference between DEG and RAD modes?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            DEG (degrees) and RAD (radians) are two different units for measuring angles. In DEG mode, angles are measured in degrees (0-360°), while in RAD mode, angles are measured in radians (0-2π). The mode you choose affects how trigonometric functions (sin, cos, tan) interpret input values and calculate results.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>How do the memory functions work?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Memory functions allow you to store and recall values during calculations: MS (Memory Store) saves the current displayed value to memory, MR (Memory Recall) displays the stored value, M+ adds the current value to memory, M- subtracts the current value from memory, and MC (Memory Clear) clears the stored value.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>What's the maximum number size this calculator can handle?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            This calculator can handle numbers within JavaScript's numerical limits (approximately ±1.7976931348623157e+308). For extremely large or small numbers, scientific notation is used automatically. If a calculation exceeds these limits, "Overflow" or "Infinity" will be displayed.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Container -->
+        <div class="ad-container mb-12">
+            <p class="text-center text-gray-400 mb-2">Advertisement</p>
+            <div class="h-20 md:h-40 bg-gray-800 bg-opacity-50 flex items-center justify-center rounded-lg">
+                <p class="text-gray-400">Google AdSense Banner</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <p class="text-gray-300 mb-4">Have questions or feedback? We'd love to hear from you!</p>
+                    <a href="../pages/contact.html" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg transition-all duration-300 inline-block">Get in Touch</a>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for FAQ Toggle -->
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            if (mobileDropdownButton && mobileDropdown) {
+                mobileDropdownButton.addEventListener('click', function() {
+                    mobileDropdown.classList.toggle('hidden');
+                    const icon = mobileDropdownButton.querySelector('i');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-qrcode text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">QR Code <span class="text-yellow-400">Generator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Generate QR codes for websites, text, contact information, and more. Easily share information with others.</p>
+        </section>
+
+        <!-- Generator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Input Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Create Your QR Code</h2>
+                    <form id="qr-generator-form" class="space-y-6">
+                        <div>
+                            <label for="qr-type" class="block text-white mb-2">QR Code Type</label>
+                            <select id="qr-type" class="w-full bg-white bg-opacity-30 border border-white border-opacity-40 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" onchange="toggleInputFields()">
+                                <option value="url" class="bg-gray-800 text-white">Website URL</option>
+                                <option value="text" class="bg-gray-800 text-white">Plain Text</option>
+                                <option value="email" class="bg-gray-800 text-white">Email Address</option>
+                                <option value="phone" class="bg-gray-800 text-white">Phone Number</option>
+                                <option value="sms" class="bg-gray-800 text-white">SMS Message</option>
+                                <option value="vcard" class="bg-gray-800 text-white">Contact Information (vCard)</option>
+                                <option value="wifi" class="bg-gray-800 text-white">WiFi Network</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Dynamic Input Fields -->
+                        <div id="input-fields">
+                            <!-- URL Input (Default) -->
+                            <div id="url-input" class="space-y-4">
+                                <div>
+                                    <label for="url-value" class="block text-white mb-2">Website URL</label>
+                                    <input type="url" id="url-value" placeholder="https://example.com" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                            </div>
+                            
+                            <!-- Text Input (Hidden by default) -->
+                            <div id="text-input" class="space-y-4 hidden">
+                                <div>
+                                    <label for="text-value" class="block text-white mb-2">Text Content</label>
+                                    <textarea id="text-value" rows="4" placeholder="Enter your text here" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Email Input (Hidden by default) -->
+                            <div id="email-input" class="space-y-4 hidden">
+                                <div>
+                                    <label for="email-address" class="block text-white mb-2">Email Address</label>
+                                    <input type="email" id="email-address" placeholder="example@email.com" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="email-subject" class="block text-white mb-2">Subject (Optional)</label>
+                                    <input type="text" id="email-subject" placeholder="Email Subject" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="email-body" class="block text-white mb-2">Body (Optional)</label>
+                                    <textarea id="email-body" rows="3" placeholder="Email content" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Phone Input (Hidden by default) -->
+                            <div id="phone-input" class="space-y-4 hidden">
+                                <div>
+                                    <label for="phone-number" class="block text-white mb-2">Phone Number</label>
+                                    <input type="tel" id="phone-number" placeholder="+1234567890" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                            </div>
+                            
+                            <!-- SMS Input (Hidden by default) -->
+                            <div id="sms-input" class="space-y-4 hidden">
+                                <div>
+                                    <label for="sms-number" class="block text-white mb-2">Phone Number</label>
+                                    <input type="tel" id="sms-number" placeholder="+1234567890" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="sms-message" class="block text-white mb-2">Message</label>
+                                    <textarea id="sms-message" rows="3" placeholder="Your SMS message" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- vCard Input (Hidden by default) -->
+                            <div id="vcard-input" class="space-y-4 hidden">
+                                <div>
+                                    <label for="vcard-name" class="block text-white mb-2">Full Name</label>
+                                    <input type="text" id="vcard-name" placeholder="John Doe" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="vcard-company" class="block text-white mb-2">Company (Optional)</label>
+                                    <input type="text" id="vcard-company" placeholder="Company Name" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="vcard-phone" class="block text-white mb-2">Phone Number</label>
+                                    <input type="tel" id="vcard-phone" placeholder="+1234567890" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="vcard-email" class="block text-white mb-2">Email</label>
+                                    <input type="email" id="vcard-email" placeholder="example@email.com" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="vcard-website" class="block text-white mb-2">Website (Optional)</label>
+                                    <input type="url" id="vcard-website" placeholder="https://example.com" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="vcard-address" class="block text-white mb-2">Address (Optional)</label>
+                                    <textarea id="vcard-address" rows="2" placeholder="123 Street, City, Country" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400"></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- WiFi Input (Hidden by default) -->
+                            <div id="wifi-input" class="space-y-4 hidden">
+                                <div>
+                                    <label for="wifi-ssid" class="block text-white mb-2">Network Name (SSID)</label>
+                                    <input type="text" id="wifi-ssid" placeholder="WiFi Network Name" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="wifi-password" class="block text-white mb-2">Password</label>
+                                    <input type="text" id="wifi-password" placeholder="WiFi Password" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                                <div>
+                                    <label for="wifi-encryption" class="block text-white mb-2">Encryption Type</label>
+                                    <select id="wifi-encryption" class="w-full bg-white bg-opacity-30 border border-white border-opacity-40 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                        <option value="WPA" class="bg-gray-800 text-white">WPA/WPA2</option>
+                                        <option value="WEP" class="bg-gray-800 text-white">WEP</option>
+                                        <option value="nopass" class="bg-gray-800 text-white">No Password</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- QR Code Options -->
+                        <div class="space-y-4 border-t border-white border-opacity-20 pt-4">
+                            <h3 class="text-xl font-semibold text-white">QR Code Options</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="qr-size" class="block text-white mb-2">Size</label>
+                                    <select id="qr-size" class="w-full bg-white bg-opacity-30 border border-white border-opacity-40 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                        <option value="5" class="bg-gray-800 text-white">Small</option>
+                                        <option value="8" selected class="bg-gray-800 text-white">Medium</option>
+                                        <option value="10" class="bg-gray-800 text-white">Large</option>
+                                        <option value="12" class="bg-gray-800 text-white">Extra Large</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="qr-color" class="block text-white mb-2">Color</label>
+                                    <input type="color" id="qr-color" value="#000000" class="w-full h-10 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-2 focus:outline-none focus:ring-2 focus:ring-green-400">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="button" onclick="generateQRCode()" class="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-green-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-qrcode mr-2"></i> Generate QR Code
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- QR Code Result -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Your QR Code</h2>
+                    <div id="qr-result" class="bg-white rounded-lg p-6 flex flex-col items-center justify-center min-h-[300px]">
+                        <p class="text-gray-500 text-center">Fill out the form and click Generate to create your QR code</p>
+                    </div>
+                    <div id="qr-download-buttons" class="mt-4 space-y-2 hidden">
+                        <button id="download-png" onclick="downloadQR('png')" class="w-full bg-white bg-opacity-10 hover:bg-opacity-20 text-white py-2 rounded-lg transition-all duration-300">
+                            <i class="fas fa-download mr-2"></i> Download as PNG
+                        </button>
+                        <button id="download-svg" onclick="downloadQR('svg')" class="w-full bg-white bg-opacity-10 hover:bg-opacity-20 text-white py-2 rounded-lg transition-all duration-300">
+                            <i class="fas fa-download mr-2"></i> Download as SVG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">How It Works</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Select QR Code Type</h3>
+                            <p class="text-gray-300">Choose what kind of information you want to encode in your QR code: website URL, text, email, phone number, SMS, contact information, or WiFi network details.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Enter Your Information</h3>
+                            <p class="text-gray-300">Fill in the required fields based on the QR code type you selected. For example, if you chose a website URL, enter the complete URL including http:// or https://.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Customize Your QR Code</h3>
+                            <p class="text-gray-300">Choose the size and color of your QR code to match your needs or branding. Larger QR codes are easier to scan from a distance.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">4</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Generate and Download</h3>
+                            <p class="text-gray-300">Click the Generate button to create your QR code. Once generated, you can download it as a PNG or SVG file to use in your documents, websites, business cards, or promotional materials.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>What is a QR code?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            QR (Quick Response) codes are two-dimensional barcodes that can be scanned using a smartphone camera or QR code reader app. They can store various types of information such as URLs, text, contact details, and more. When scanned, they quickly direct users to websites, display text, or perform specific actions based on the encoded data.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>How do I scan a QR code?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Most modern smartphones can scan QR codes directly through their camera app. Simply open your camera, point it at the QR code, and a notification should appear. If your camera doesn't automatically scan QR codes, you may need to download a QR code scanner app from your app store.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>What's the difference between PNG and SVG downloads?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            PNG is a raster image format that works well for most purposes but may become pixelated when enlarged. SVG is a vector format that maintains perfect quality at any size, making it ideal for printing or when you need to resize the QR code. SVG files are also typically smaller in file size.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Can I customize my QR code with a logo?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Our basic generator doesn't support adding logos to QR codes. However, QR codes have error correction capabilities, which means you can overlay a small logo in the center after downloading without affecting scannability. Just make sure not to cover too much of the code, and test the final result to ensure it still scans properly.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Is there a limit to how much information a QR code can store?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Yes, QR codes have capacity limits. The maximum amount of data depends on the type of information and the QR code version. Generally, a QR code can store up to about 4,000 alphanumeric characters. For best scanning results, we recommend keeping the data concise, especially for URLs or text content.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Container -->
+        <div class="ad-container mb-12">
+            <p class="text-center text-gray-400 mb-2">Advertisement</p>
+            <div class="h-20 md:h-40 bg-gray-800 bg-opacity-50 flex items-center justify-center rounded-lg">
+                <p class="text-gray-400">Google AdSense Banner</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300"><i class="fas fa-envelope mr-2 text-yellow-400"></i> contact@calchub.com</li>
+                        <li class="text-gray-300"><i class="fas fa-phone mr-2 text-yellow-400"></i> +1 (123) 456-7890</li>
+                        <li class="text-gray-300"><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i> 123 Calculator St, Math City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8 text-center">
+                <p class="text-gray-300">&copy; <span id="current-year"></span> CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+        const mobileDropdown = document.getElementById('mobile-dropdown');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileDropdownButton.addEventListener('click', () => {
+            mobileDropdown.classList.toggle('hidden');
+        });
+
+        // Toggle input fields based on QR code type
+        function toggleInputFields() {
+            const qrType = document.getElementById('qr-type').value;
+            const inputDivs = document.querySelectorAll('#input-fields > div');
+            
+            // Hide all input divs
+            inputDivs.forEach(div => div.classList.add('hidden'));
+            
+            // Show the selected input div
+            document.getElementById(`${qrType}-input`).classList.remove('hidden');
+        }
+        
+        // Generate QR Code
+        function generateQRCode() {
+            const qrType = document.getElementById('qr-type').value;
+            const qrSize = parseInt(document.getElementById('qr-size').value);
+            const qrColor = document.getElementById('qr-color').value.replace('#', '');
+            const bgColor = 'ffffff'; // White background for contrast
+            let qrData = '';
+            
+            // Get data based on QR type
+            switch(qrType) {
+                case 'url':
+                    qrData = document.getElementById('url-value').value.trim();
+                    if (!qrData) {
+                        alert('Please enter a valid URL');
+                        return;
+                    }
+                    if (!qrData.startsWith('http://') && !qrData.startsWith('https://')) {
+                        qrData = 'https://' + qrData;
+                    }
+                    break;
+                    
+                case 'text':
+                    qrData = document.getElementById('text-value').value.trim();
+                    if (!qrData) {
+                        alert('Please enter some text');
+                        return;
+                    }
+                    break;
+                    
+                case 'email':
+                    const email = document.getElementById('email-address').value.trim();
+                    const subject = document.getElementById('email-subject').value.trim();
+                    const body = document.getElementById('email-body').value.trim();
+                    
+                    if (!email) {
+                        alert('Please enter an email address');
+                        return;
+                    }
+                    
+                    qrData = `mailto:${email}`;
+                    if (subject) qrData += `?subject=${encodeURIComponent(subject)}`;
+                    if (body) qrData += `${subject ? '&' : '?'}body=${encodeURIComponent(body)}`;
+                    break;
+                    
+                case 'phone':
+                    const phone = document.getElementById('phone-number').value.trim();
+                    if (!phone) {
+                        alert('Please enter a phone number');
+                        return;
+                    }
+                    qrData = `tel:${phone}`;
+                    break;
+                    
+                case 'sms':
+                    const smsNumber = document.getElementById('sms-number').value.trim();
+                    const smsMessage = document.getElementById('sms-message').value.trim();
+                    
+                    if (!smsNumber) {
+                        alert('Please enter a phone number');
+                        return;
+                    }
+                    
+                    qrData = `smsto:${smsNumber}`;
+                    if (smsMessage) qrData += `:${encodeURIComponent(smsMessage)}`;
+                    break;
+                    
+                case 'vcard':
+                    const name = document.getElementById('vcard-name').value.trim();
+                    const company = document.getElementById('vcard-company').value.trim();
+                    const vcardPhone = document.getElementById('vcard-phone').value.trim();
+                    const vcardEmail = document.getElementById('vcard-email').value.trim();
+                    const website = document.getElementById('vcard-website').value.trim();
+                    const address = document.getElementById('vcard-address').value.trim();
+                    
+                    if (!name || !vcardPhone || !vcardEmail) {
+                        alert('Please enter at least name, phone, and email for the contact');
+                        return;
+                    }
+                    
+                    // Create vCard format
+                    qrData = 'BEGIN:VCARD\nVERSION:3.0\n';
+                    qrData += `N:${name}\n`;
+                    qrData += `FN:${name}\n`;
+                    if (company) qrData += `ORG:${company}\n`;
+                    if (vcardPhone) qrData += `TEL:${vcardPhone}\n`;
+                    if (vcardEmail) qrData += `EMAIL:${vcardEmail}\n`;
+                    if (website) qrData += `URL:${website}\n`;
+                    if (address) qrData += `ADR:;;${address}\n`;
+                    qrData += 'END:VCARD';
+                    break;
+                    
+                case 'wifi':
+                    const ssid = document.getElementById('wifi-ssid').value.trim();
+                    const password = document.getElementById('wifi-password').value.trim();
+                    const encryption = document.getElementById('wifi-encryption').value;
+                    
+                    if (!ssid) {
+                        alert('Please enter a WiFi network name');
+                        return;
+                    }
+                    
+                    qrData = `WIFI:S:${ssid};`;
+                    if (encryption !== 'nopass') qrData += `T:${encryption};`;
+                    if (password && encryption !== 'nopass') qrData += `P:${password};`;
+                    qrData += ';';
+                    break;
+            }
+            
+            // Generate QR code
+            try {
+                // Create QR code instance
+                const qr = qrcode(0, 'L');
+                qr.addData(qrData);
+                qr.make();
+                
+                // Create SVG
+                const svgCode = qr.createSvgTag({
+                    cellSize: 8 * qrSize / 5,
+                    margin: 4,
+                    color: qrColor,
+                    background: bgColor
+                });
+                
+                // Display QR code
+                document.getElementById('qr-result').innerHTML = svgCode;
+                
+                // Store QR data for download
+                window.qrSvgCode = svgCode;
+                window.qrData = qrData;
+                
+                // Show download buttons
+                document.getElementById('qr-download-buttons').classList.remove('hidden');
+                
+                // Save to calculation history
+                saveToHistory(
+                    'QR Code Generator',
+                    `Type: ${qrType}`,
+                    `QR Code Generated`
+                );
+            } catch (error) {
+                console.error('Error generating QR code:', error);
+                document.getElementById('qr-result').innerHTML = `
+                    <div class="text-red-500 text-center">
+                        <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                        <p>Error generating QR code. Please check your input and try again.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Download QR code
+        function downloadQR(format) {
+            if (!window.qrSvgCode) return;
+            
+            const svgElement = document.querySelector('#qr-result svg');
+            
+            if (format === 'svg') {
+                // Download as SVG
+                const svgData = new XMLSerializer().serializeToString(svgElement);
+                const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+                const svgUrl = URL.createObjectURL(svgBlob);
+                
+                const downloadLink = document.createElement('a');
+                downloadLink.href = svgUrl;
+                downloadLink.download = 'qrcode.svg';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                URL.revokeObjectURL(svgUrl);
+            } else if (format === 'png') {
+                // Download as PNG
+                const canvas = document.createElement('canvas');
+                const svgSize = svgElement.viewBox.baseVal.width;
+                canvas.width = svgSize * 2; // Higher resolution
+                canvas.height = svgSize * 2;
+                const ctx = canvas.getContext('2d');
+                
+                // Create image from SVG
+                const img = new Image();
+                const svgData = new XMLSerializer().serializeToString(svgElement);
+                const svgUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)));
+                
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    
+                    // Download image
+                    const pngUrl = canvas.toDataURL('image/png');
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = pngUrl;
+                    downloadLink.download = 'qrcode.png';
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                    document.body.removeChild(downloadLink);
+                };
+                
+                img.src = svgUrl;
+            }
+        }
+    </script>
+</body>
+</html>

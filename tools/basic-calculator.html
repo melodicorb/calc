@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/basic-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <img src="../images/calchub-logo.svg" alt="CalcHub Logo" class="h-10 mr-2">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-calculator text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Basic <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Perform simple arithmetic operations with this easy-to-use calculator.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-md mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <!-- Calculator Display -->
+            <div class="mb-4">
+                <div id="calc-history" class="text-right text-gray-400 h-6 overflow-hidden"></div>
+                <div id="calc-display" class="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-right text-white text-3xl font-semibold h-16 flex items-center justify-end overflow-hidden">0</div>
+            </div>
+
+            <!-- Calculator Buttons -->
+            <div class="grid grid-cols-4 gap-2">
+                <!-- Row 1 -->
+                <button class="calc-btn calc-clear bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg transition-colors col-span-2">C</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="backspace"><i class="fas fa-backspace"></i></button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="/">÷</button>
+
+                <!-- Row 2 -->
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">7</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">8</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">9</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="*">×</button>
+
+                <!-- Row 3 -->
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">4</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">5</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">6</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="-">−</button>
+
+                <!-- Row 4 -->
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">1</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">2</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">3</button>
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="+">+</button>
+
+                <!-- Row 5 -->
+                <button class="calc-btn calc-operation bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 rounded-lg transition-colors" data-op="+/-">±</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">0</button>
+                <button class="calc-btn calc-number bg-purple-700 hover:bg-purple-800 text-white font-bold py-3 rounded-lg transition-colors">.</button>
+                <button class="calc-btn calc-equals bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-colors">=</button>
+            </div>
+        </section>
+
+        <!-- How to Use Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">How to Use</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Enter Numbers</h3>
+                            <p class="text-gray-300">Click the number buttons to input values. You can also use the decimal point for non-integer numbers.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Choose Operation</h3>
+                            <p class="text-gray-300">Select an operation (addition, subtraction, multiplication, or division) to perform on your numbers.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Get Result</h3>
+                            <p class="text-gray-300">Press the equals button to calculate the result. The answer will be displayed on the screen.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">4</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Clear or Continue</h3>
+                            <p class="text-gray-300">Press 'C' to clear the calculator and start a new calculation, or continue operating on your result.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-history text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Calculation History</h3>
+                    </div>
+                    <p class="text-gray-300">View your previous operation while you work, making it easy to keep track of complex calculations.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-keyboard text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Keyboard Support</h3>
+                    </div>
+                    <p class="text-gray-300">Use your keyboard for faster calculations. Number keys, operators, Enter for equals, and Escape for clear.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-sync-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Continuous Calculations</h3>
+                    </div>
+                    <p class="text-gray-300">Continue performing operations on your results without having to re-enter numbers.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="h-12 w-12 rounded-full bg-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-mobile-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white">Mobile Friendly</h3>
+                    </div>
+                    <p class="text-gray-300">Fully responsive design works perfectly on all devices, from desktop to mobile phones.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>How accurate is this calculator?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            This calculator provides accurate results for basic arithmetic operations. However, due to the way computers handle floating-point numbers, there might be small rounding errors in some decimal calculations, which is normal for all digital calculators.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Can I use keyboard shortcuts?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Yes! You can use your keyboard for faster calculations. Use number keys for digits, +, -, *, / for operations, Enter for equals, and Escape for clear. The backspace key also works to delete the last digit.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>What happens if I divide by zero?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            If you attempt to divide by zero, the calculator will display "Error" as division by zero is mathematically undefined. You'll need to clear the calculator to continue with new calculations.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Is there a limit to the number size?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Yes, this calculator can handle numbers within JavaScript's numerical limits. For extremely large or small numbers, scientific notation may be used. If a number exceeds these limits, "Overflow" will be displayed.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Container -->
+        <div class="ad-container mb-12">
+            <p class="text-center text-gray-400 mb-2">Advertisement</p>
+            <div class="h-20 md:h-40 bg-gray-800 bg-opacity-50 flex items-center justify-center rounded-lg">
+                <p class="text-gray-400">Google AdSense Banner</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <p class="text-gray-300 mb-4">Have questions or feedback? We'd love to hear from you!</p>
+                    <a href="../pages/contact.html" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded-lg transition-all duration-300 inline-block">Get in Touch</a>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for FAQ Toggle -->
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            if (mobileDropdownButton && mobileDropdown) {
+                mobileDropdownButton.addEventListener('click', function() {
+                    mobileDropdown.classList.toggle('hidden');
+                    const icon = mobileDropdownButton.querySelector('i');
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

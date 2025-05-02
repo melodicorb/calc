@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/compound-interest-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-chart-line text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Compound Interest <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate compound interest with options for different compounding frequencies.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-purple-900 bg-opacity-40 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Values</h2>
+                    <form id="compound-interest-form" class="space-y-6">
+                        <div>
+                            <label for="principal" class="block text-white mb-2">Principal Amount</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-3 text-white">$</span>
+                                <input type="number" id="principal" class="w-full bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter principal amount" required min="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="rate" class="block text-white mb-2">Annual Interest Rate (%)</label>
+                            <div class="relative">
+                                <input type="number" id="rate" class="w-full bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter interest rate" required min="0" step="0.01">
+                                <span class="absolute right-3 top-3 text-white">%</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="time" class="block text-white mb-2">Time Period</label>
+                            <div class="flex space-x-4">
+                                <input type="number" id="time" class="flex-1 bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter time period" required min="0" step="0.01">
+                                <select id="time-unit" class="bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                    <option value="years">Years</option>
+                                    <option value="months">Months</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="compound-frequency" class="block text-white mb-2">Compounding Frequency</label>
+                            <select id="compound-frequency" class="w-full bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="annually">Annually (1 time per year)</option>
+                                <option value="semi-annually">Semi-annually (2 times per year)</option>
+                                <option value="quarterly">Quarterly (4 times per year)</option>
+                                <option value="monthly" selected>Monthly (12 times per year)</option>
+                                <option value="daily">Daily (365 times per year)</option>
+                                <option value="continuous">Continuous</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="additional-contribution" class="block text-white mb-2">Additional Contribution (Optional)</label>
+                            <div class="relative">
+                                <span class="absolute left-3 top-3 text-white">$</span>
+                                <input type="number" id="additional-contribution" class="w-full bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter amount (optional)" min="0" step="0.01">
+                            </div>
+                            <div class="mt-2">
+                                <select id="contribution-frequency" class="w-full bg-purple-800 bg-opacity-70 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                    <option value="monthly">Monthly Contribution</option>
+                                    <option value="annually">Annual Contribution</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Interest
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Results</h2>
+                    <div id="result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[400px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-calculator text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter values and click Calculate to see the results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-purple-900 bg-opacity-40 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Compound Interest</h2>
+            
+            <div class="space-y-6 text-gray-200">
+                <p>
+                    Compound interest is the interest calculated on the initial principal and also on the accumulated interest of previous periods. It's the result of reinvesting interest, rather than paying it out, so that interest in the next period is earned on the principal sum plus previously accumulated interest.
+                </p>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Formula</h3>
+                    <p class="text-lg font-mono bg-white bg-opacity-5 p-3 rounded">
+                        A = P(1 + r/n)^(nt)
+                    </p>
+                    <p class="mt-2">
+                        Where:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>A = Final amount</li>
+                        <li>P = Principal (initial investment)</li>
+                        <li>r = Annual interest rate (decimal)</li>
+                        <li>n = Number of times interest is compounded per year</li>
+                        <li>t = Time (in years)</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Compounding Frequencies</h3>
+                    <p>
+                        The frequency at which interest is compounded can significantly affect the final amount:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Annually:</strong> Interest is calculated once per year</li>
+                        <li><strong>Semi-annually:</strong> Interest is calculated twice per year</li>
+                        <li><strong>Quarterly:</strong> Interest is calculated four times per year</li>
+                        <li><strong>Monthly:</strong> Interest is calculated 12 times per year</li>
+                        <li><strong>Daily:</strong> Interest is calculated 365 times per year</li>
+                        <li><strong>Continuous:</strong> Interest is calculated continuously (using the formula A = Pe^(rt))</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Example</h3>
+                    <p>
+                        If you invest $10,000 at an annual interest rate of 5%, compounded monthly for 5 years:
+                    </p>
+                    <p class="mt-2 font-mono bg-white bg-opacity-5 p-3 rounded">
+                        A = $10,000 × (1 + 0.05/12)^(12×5) = $12,833.59
+                    </p>
+                    <p class="mt-2">
+                        This gives you a total interest of $2,833.59 over the 5-year period.
+                    </p>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Applications</h3>
+                    <p>
+                        Compound interest is commonly used in:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Savings accounts and certificates of deposit (CDs)</li>
+                        <li>Investment accounts and retirement funds</li>
+                        <li>Mortgages and loans</li>
+                        <li>Credit card debt</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <p class="text-gray-300 mb-2"><i class="fas fa-envelope mr-2"></i> support@calchub.com</p>
+                    <p class="text-gray-300 mb-2"><i class="fas fa-phone mr-2"></i> +1 (555) 123-4567</p>
+                    <p class="text-gray-300"><i class="fas fa-map-marker-alt mr-2"></i> 123 Calculator St, Math City, MC 12345</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-300">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            if (mobileDropdownButton && mobileDropdown) {
+                mobileDropdownButton.addEventListener('click', function() {
+                    mobileDropdown.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

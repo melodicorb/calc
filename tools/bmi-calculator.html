@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/bmi-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-weight text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">BMI <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate your Body Mass Index (BMI) and determine if you're at a healthy weight for your height.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Your Details</h2>
+                    <form id="bmi-form" class="space-y-6">
+                        <div class="mb-6">
+                            <label class="block text-white mb-4">Unit System</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center">
+                                    <input type="radio" name="unit-system" value="metric" checked class="mr-2 text-green-500 focus:ring-green-500">
+                                    <span class="text-white">Metric (cm, kg)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="unit-system" value="imperial" class="mr-2 text-green-500 focus:ring-green-500">
+                                    <span class="text-white">Imperial (in, lbs)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Metric Inputs (default) -->
+                        <div id="metric-inputs">
+                            <div>
+                                <label for="height-cm" class="block text-white mb-2">Height (cm)</label>
+                                <input type="number" id="height-cm" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter height in centimeters" required min="50" max="300" step="0.1">
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="weight-kg" class="block text-white mb-2">Weight (kg)</label>
+                                <input type="number" id="weight-kg" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter weight in kilograms" required min="20" max="500" step="0.1">
+                            </div>
+                        </div>
+                        
+                        <!-- Imperial Inputs (hidden by default) -->
+                        <div id="imperial-inputs" class="hidden">
+                            <div>
+                                <label for="height-ft" class="block text-white mb-2">Height (ft & in)</label>
+                                <div class="flex space-x-4">
+                                    <div class="flex-1">
+                                        <input type="number" id="height-ft" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Feet" required min="1" max="8" step="1">
+                                    </div>
+                                    <div class="flex-1">
+                                        <input type="number" id="height-in" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Inches" required min="0" max="11" step="1">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="weight-lbs" class="block text-white mb-2">Weight (lbs)</label>
+                                <input type="number" id="weight-lbs" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter weight in pounds" required min="40" max="1000" step="0.1">
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="age" class="block text-white mb-2">Age (optional)</label>
+                            <input type="number" id="age" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter your age" min="2" max="120" step="1">
+                        </div>
+                        
+                        <div class="mt-4">
+                            <label for="gender" class="block text-white mb-2">Gender (optional)</label>
+                            <select id="gender" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-green-400">
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn" class="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-green-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate BMI
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Your BMI Results</h2>
+                    <div id="result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[400px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-weight text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter your height and weight to calculate your BMI</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- BMI Chart Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">BMI Categories</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-white">
+                    <thead>
+                        <tr class="bg-white bg-opacity-20">
+                            <th class="px-4 py-3 text-left">BMI Range</th>
+                            <th class="px-4 py-3 text-left">Category</th>
+                            <th class="px-4 py-3 text-left">Health Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white divide-opacity-10">
+                        <tr class="bg-white bg-opacity-5">
+                            <td class="px-4 py-3">Below 18.5</td>
+                            <td class="px-4 py-3">Underweight</td>
+                            <td class="px-4 py-3">Increased risk for health problems</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3">18.5 - 24.9</td>
+                            <td class="px-4 py-3">Normal weight</td>
+                            <td class="px-4 py-3">Lowest risk for health problems</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-5">
+                            <td class="px-4 py-3">25.0 - 29.9</td>
+                            <td class="px-4 py-3">Overweight</td>
+                            <td class="px-4 py-3">Increased risk for health problems</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3">30.0 - 34.9</td>
+                            <td class="px-4 py-3">Obesity (Class 1)</td>
+                            <td class="px-4 py-3">High risk for health problems</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-5">
+                            <td class="px-4 py-3">35.0 - 39.9</td>
+                            <td class="px-4 py-3">Obesity (Class 2)</td>
+                            <td class="px-4 py-3">Very high risk for health problems</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3">40.0 and above</td>
+                            <td class="px-4 py-3">Obesity (Class 3)</td>
+                            <td class="px-4 py-3">Extremely high risk for health problems</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About BMI</h2>
+            
+            <div class="space-y-6 text-gray-200">
+                <p>
+                    Body Mass Index (BMI) is a numerical value of your weight in relation to your height. It's a commonly used indicator to categorize individuals as underweight, normal weight, overweight, or obese.
+                </p>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">How BMI is Calculated</h3>
+                    <p>
+                        BMI is calculated using a simple formula that divides a person's weight by the square of their height.
+                    </p>
+                    <p class="mt-2 font-mono bg-white bg-opacity-5 p-3 rounded">
+                        BMI = weight(kg) / height(m)²
+                    </p>
+                    <p class="mt-2">
+                        For imperial units:
+                    </p>
+                    <p class="mt-2 font-mono bg-white bg-opacity-5 p-3 rounded">
+                        BMI = [weight(lbs) / height(in)²] × 703
+                    </p>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Limitations of BMI</h3>
+                    <p>
+                        While BMI is a useful screening tool, it has several limitations:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>It doesn't account for muscle mass, bone density, or body composition</li>
+                        <li>Athletes may have a high BMI due to muscle mass despite low body fat</li>
+                        <li>It may not be accurate for elderly individuals who have lost muscle mass</li>
+                        <li>It doesn't consider where fat is distributed in the body</li>
+                        <li>BMI ranges may vary for different ethnic groups</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Health Recommendations</h3>
+                    <p>
+                        If your BMI falls outside the normal range, consider these recommendations:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Underweight:</strong> Consult with a healthcare provider about healthy weight gain strategies</li>
+                        <li><strong>Normal weight:</strong> Maintain your weight with balanced diet and regular physical activity</li>
+                        <li><strong>Overweight:</strong> Consider moderate weight loss through improved diet and increased physical activity</li>
+                        <li><strong>Obese:</strong> Seek medical advice for a comprehensive weight management plan</li>
+                    </ul>
+                    <p class="mt-2 text-yellow-400">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Always consult with healthcare professionals before making significant changes to your diet or exercise routine.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Is BMI accurate for everyone?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        No, BMI has limitations. It doesn't distinguish between muscle and fat, so athletes or muscular individuals may have a high BMI despite being healthy. It also may not be accurate for elderly people, pregnant women, or certain ethnic groups who may have different body compositions.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>What should I do if my BMI indicates I'm overweight?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        If your BMI indicates you're overweight, it's advisable to consult with a healthcare provider. They can assess your overall health and provide personalized advice. Generally, a combination of balanced diet, regular physical activity, and lifestyle changes can help achieve a healthier weight.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How often should I check my BMI?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        For most adults, checking BMI once or twice a year is sufficient unless you're actively trying to change your weight or have been advised by a healthcare provider to monitor it more frequently. Significant weight changes should be discussed with a healthcare professional.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Are there better alternatives to BMI?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Yes, there are more comprehensive measurements like body fat percentage, waist circumference, waist-to-hip ratio, and body composition analysis. These can provide more detailed information about your health status. However, they may require specialized equipment or professional assessment.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">support@calchub.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">123 Calculator St, Math City, CA 90210</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Toggle FAQ answers
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed & Time Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/speed-time-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-tachometer-alt text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Speed & Time <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate speed, distance, or time using the relationship between these three variables.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Values</h2>
+                    <form id="speed-time-form" class="space-y-6">
+                        <!-- Calculation Type -->
+                        <div class="mb-4">
+                            <label for="calculation-type" class="block text-white mb-2">I want to calculate:</label>
+                            <select id="calculation-type" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400">
+                                <option value="speed">Speed</option>
+                                <option value="distance">Distance</option>
+                                <option value="time">Time</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Distance Input -->
+                        <div id="distance-input-group" class="mb-4">
+                            <label for="distance-value" class="block text-white mb-2">Distance</label>
+                            <div class="flex space-x-2">
+                                <input type="number" id="distance-value" class="flex-1 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400" placeholder="Enter distance" step="any">
+                                <select id="distance-unit" class="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400">
+                                    <option value="kilometers">Kilometers (km)</option>
+                                    <option value="meters">Meters (m)</option>
+                                    <option value="miles">Miles (mi)</option>
+                                    <option value="feet">Feet (ft)</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Speed Input -->
+                        <div id="speed-input-group" class="mb-4">
+                            <label for="speed-value" class="block text-white mb-2">Speed</label>
+                            <div class="flex space-x-2">
+                                <input type="number" id="speed-value" class="flex-1 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400" placeholder="Enter speed" step="any">
+                                <select id="speed-unit" class="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400">
+                                    <option value="kmh">km/h</option>
+                                    <option value="ms">m/s</option>
+                                    <option value="mph">mph</option>
+                                    <option value="fps">ft/s</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Time Input -->
+                        <div id="time-input-group" class="mb-4">
+                            <label for="time-value" class="block text-white mb-2">Time</label>
+                            <div class="flex space-x-2">
+                                <input type="number" id="time-value" class="flex-1 bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400" placeholder="Enter time" step="any">
+                                <select id="time-unit" class="bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400">
+                                    <option value="hours">Hours</option>
+                                    <option value="minutes">Minutes</option>
+                                    <option value="seconds">Seconds</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn" class="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-red-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Result</h2>
+                    <div id="result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[300px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-tachometer-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter values and click Calculate</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Common Conversions -->
+                    <div class="mt-6 bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10">
+                        <h3 class="text-xl font-bold text-white mb-4">Common Conversions</h3>
+                        <div id="common-conversions" class="grid grid-cols-1 gap-2 text-gray-200">
+                            <p>1 km/h = 0.28 m/s = 0.62 mph</p>
+                            <p>1 m/s = 3.6 km/h = 2.24 mph</p>
+                            <p>1 mph = 1.61 km/h = 0.45 m/s</p>
+                            <p>1 hour = 60 minutes = 3600 seconds</p>
+                            <p>1 km = 1000 m = 0.62 miles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Speed, Distance & Time</h2>
+            
+            <div class="space-y-6 text-gray-200">
+                <p>
+                    Speed, distance, and time are related by a simple formula: <strong>Speed = Distance / Time</strong>. This relationship allows you to calculate any one of these variables if you know the other two.
+                </p>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Formulas</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Speed = Distance ÷ Time</strong> - Calculate how fast something is moving</li>
+                        <li><strong>Distance = Speed × Time</strong> - Calculate how far something will travel</li>
+                        <li><strong>Time = Distance ÷ Speed</strong> - Calculate how long a journey will take</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Speed Units</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Kilometers per hour (km/h)</strong> - Common for road speeds in most countries</li>
+                        <li><strong>Meters per second (m/s)</strong> - Standard unit in physics</li>
+                        <li><strong>Miles per hour (mph)</strong> - Used in the US, UK, and some other countries</li>
+                        <li><strong>Feet per second (ft/s)</strong> - Used in some engineering applications</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Practical Applications</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Travel Planning:</strong> Calculate arrival times or required speeds for journeys</li>
+                        <li><strong>Sports:</strong> Measure athletic performance in running, cycling, swimming, etc.</li>
+                        <li><strong>Physics:</strong> Solve motion problems in academic or professional settings</li>
+                        <li><strong>Navigation:</strong> Plan routes and estimate travel durations</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">About CalcHub</h3>
+                    <p class="text-gray-300 mb-4">CalcHub provides free, easy-to-use calculators and conversion tools for mathematics, finance, health, and more.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Calculator Categories -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Connect -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Connect With Us</h3>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            document.getElementById('mobile-dropdown').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

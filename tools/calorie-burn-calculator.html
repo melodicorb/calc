@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Burn Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/calorie-burn-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-red-500 to-orange-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-fire text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Calorie Burn <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Estimate how many calories you burn during different physical activities based on your weight and duration.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Your Details</h2>
+                    <form id="calorie-burn-form" class="space-y-6">
+                        <div class="mb-6">
+                            <label class="block text-white mb-4 font-medium">Unit System</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center bg-white bg-opacity-10 px-4 py-2 rounded-lg border border-white border-opacity-30 hover:bg-opacity-20 transition-all">
+                                    <input type="radio" name="unit-system" value="metric" checked class="mr-2 text-red-500 focus:ring-red-500">
+                                    <span class="text-white font-medium">Metric (kg)</span>
+                                </label>
+                                <label class="flex items-center bg-white bg-opacity-10 px-4 py-2 rounded-lg border border-white border-opacity-30 hover:bg-opacity-20 transition-all">
+                                    <input type="radio" name="unit-system" value="imperial" class="mr-2 text-red-500 focus:ring-red-500">
+                                    <span class="text-white font-medium">Imperial (lbs)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Weight Input -->
+                        <div id="metric-weight" class="mb-4">
+                            <label for="weight-kg" class="block text-white mb-2 font-medium">Weight (kg)</label>
+                            <input type="number" id="weight-kg" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner" placeholder="Enter your weight in kilograms" required min="20" max="300" step="0.1">
+                        </div>
+                        
+                        <div id="imperial-weight" class="mb-4 hidden">
+                            <label for="weight-lbs" class="block text-white mb-2 font-medium">Weight (lbs)</label>
+                            <input type="number" id="weight-lbs" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner" placeholder="Enter your weight in pounds" required min="40" max="660" step="0.1">
+                        </div>
+                        
+                        <!-- Activity Selection -->
+                        <div class="mb-4">
+                            <label for="activity-type" class="block text-white mb-2 font-medium">Activity Type</label>
+                            <select id="activity-type" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner" required>
+                                <option value="" disabled selected class="bg-gray-800 text-white">Select an activity</option>
+                                <optgroup label="Light Intensity Activities" class="bg-gray-800 text-white font-medium">
+                                    <option value="walking_slow" class="bg-gray-800 text-white">Walking (slow, 2 mph)</option>
+                                    <option value="walking_moderate" class="bg-gray-800 text-white">Walking (moderate, 3 mph)</option>
+                                    <option value="cycling_light" class="bg-gray-800 text-white">Cycling (light effort)</option>
+                                    <option value="swimming_light" class="bg-gray-800 text-white">Swimming (light effort)</option>
+                                    <option value="yoga" class="bg-gray-800 text-white">Yoga</option>
+                                    <option value="stretching" class="bg-gray-800 text-white">Stretching</option>
+                                </optgroup>
+                                <optgroup label="Moderate Intensity Activities" class="bg-gray-800 text-white font-medium">
+                                    <option value="walking_brisk" class="bg-gray-800 text-white">Walking (brisk, 4 mph)</option>
+                                    <option value="hiking" class="bg-gray-800 text-white">Hiking</option>
+                                    <option value="cycling_moderate" class="bg-gray-800 text-white">Cycling (moderate effort)</option>
+                                    <option value="swimming_moderate" class="bg-gray-800 text-white">Swimming (moderate effort)</option>
+                                    <option value="dancing" class="bg-gray-800 text-white">Dancing</option>
+                                    <option value="aerobics" class="bg-gray-800 text-white">Aerobics</option>
+                                    <option value="weight_training" class="bg-gray-800 text-white">Weight Training</option>
+                                </optgroup>
+                                <optgroup label="Vigorous Intensity Activities" class="bg-gray-800 text-white font-medium">
+                                    <option value="running_5mph" class="bg-gray-800 text-white">Running (5 mph)</option>
+                                    <option value="running_6mph" class="bg-gray-800 text-white">Running (6 mph)</option>
+                                    <option value="running_7mph" class="bg-gray-800 text-white">Running (7 mph)</option>
+                                    <option value="running_8mph" class="bg-gray-800 text-white">Running (8 mph)</option>
+                                    <option value="cycling_vigorous" class="bg-gray-800 text-white">Cycling (vigorous effort)</option>
+                                    <option value="swimming_vigorous" class="bg-gray-800 text-white">Swimming (vigorous effort)</option>
+                                    <option value="hiit" class="bg-gray-800 text-white">HIIT (High Intensity Interval Training)</option>
+                                    <option value="jump_rope" class="bg-gray-800 text-white">Jump Rope</option>
+                                </optgroup>
+                                <optgroup label="Sports" class="bg-gray-800 text-white font-medium">
+                                    <option value="basketball" class="bg-gray-800 text-white">Basketball</option>
+                                    <option value="football" class="bg-gray-800 text-white">Football</option>
+                                    <option value="soccer" class="bg-gray-800 text-white">Soccer</option>
+                                    <option value="tennis" class="bg-gray-800 text-white">Tennis</option>
+                                    <option value="volleyball" class="bg-gray-800 text-white">Volleyball</option>
+                                </optgroup>
+                                <optgroup label="Daily Activities" class="bg-gray-800 text-white font-medium">
+                                    <option value="housework" class="bg-gray-800 text-white">Housework</option>
+                                    <option value="gardening" class="bg-gray-800 text-white">Gardening</option>
+                                    <option value="shopping" class="bg-gray-800 text-white">Shopping</option>
+                                    <option value="cooking" class="bg-gray-800 text-white">Cooking</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <!-- Duration Input -->
+                        <div class="mb-4">
+                            <label for="duration" class="block text-white mb-2 font-medium">Duration</label>
+                            <div class="flex space-x-4">
+                                <input type="number" id="duration" class="flex-1 bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner" placeholder="Enter duration" required min="1" max="1440" step="1">
+                                <select id="duration-unit" class="bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner">
+                                    <option value="minutes" class="bg-gray-800 text-white">Minutes</option>
+                                    <option value="hours" class="bg-gray-800 text-white">Hours</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Optional Inputs -->
+                        <div class="mb-4">
+                            <label for="age" class="block text-white mb-2 font-medium">Age (optional)</label>
+                            <input type="number" id="age" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner" placeholder="Enter your age" min="10" max="100" step="1">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="gender" class="block text-white mb-2 font-medium">Gender (optional)</label>
+                            <select id="gender" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-400 shadow-inner">
+                                <option value="" class="bg-gray-800 text-white">Select gender</option>
+                                <option value="male" class="bg-gray-800 text-white">Male</option>
+                                <option value="female" class="bg-gray-800 text-white">Female</option>
+                                <option value="other" class="bg-gray-800 text-white">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn" class="w-full bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-red-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Calories
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Calorie Burn Results</h2>
+                    <div id="result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[400px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-fire text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter your details and select an activity to calculate calories burned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Activity MET Values Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Activity Intensity Levels (MET Values)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-white">
+                    <thead>
+                        <tr class="bg-white bg-opacity-20">
+                            <th class="px-4 py-3 text-left">Intensity Level</th>
+                            <th class="px-4 py-3 text-left">MET Range</th>
+                            <th class="px-4 py-3 text-left">Example Activities</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white divide-opacity-10">
+                        <tr class="bg-white bg-opacity-5">
+                            <td class="px-4 py-3">Light</td>
+                            <td class="px-4 py-3">1.5 - 3.0</td>
+                            <td class="px-4 py-3">Walking slowly, light housework, stretching</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3">Moderate</td>
+                            <td class="px-4 py-3">3.0 - 6.0</td>
+                            <td class="px-4 py-3">Brisk walking, cycling (light effort), dancing</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-5">
+                            <td class="px-4 py-3">Vigorous</td>
+                            <td class="px-4 py-3">6.0 - 9.0</td>
+                            <td class="px-4 py-3">Jogging, swimming laps, aerobics</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3">Very Vigorous</td>
+                            <td class="px-4 py-3">9.0+</td>
+                            <td class="px-4 py-3">Running, HIIT, jump rope, competitive sports</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-gray-300 mt-4 text-sm">MET (Metabolic Equivalent of Task) is a measure of the energy cost of physical activities as a multiple of resting metabolic rate.</p>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Calorie Burning</h2>
+            
+            <div class="space-y-6 text-gray-200">
+                <p>
+                    Calorie burning refers to the energy expenditure that occurs during physical activity. Understanding how many calories you burn during different activities can help with weight management and fitness goals.
+                </p>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">How Calories Burned is Calculated</h3>
+                    <p>
+                        The calculation uses the MET value of an activity, your weight, and the duration of the activity.
+                    </p>
+                    <p class="mt-2 font-mono bg-white bg-opacity-5 p-3 rounded">
+                        Calories Burned = MET × Weight(kg) × Duration(hours)
+                    </p>
+                    <p class="mt-2">
+                        Where:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>MET (Metabolic Equivalent of Task) is the energy cost of the activity</li>
+                        <li>Weight is your body weight in kilograms</li>
+                        <li>Duration is how long you performed the activity in hours</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Factors Affecting Calorie Burn</h3>
+                    <p>
+                        Several factors can influence how many calories you burn during physical activity:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Body weight:</strong> Heavier individuals burn more calories performing the same activity</li>
+                        <li><strong>Intensity level:</strong> Higher intensity activities burn more calories per minute</li>
+                        <li><strong>Fitness level:</strong> As you become more fit, your body becomes more efficient</li>
+                        <li><strong>Age:</strong> Metabolic rate tends to decrease with age</li>
+                        <li><strong>Body composition:</strong> Muscle burns more calories than fat, even at rest</li>
+                        <li><strong>Environmental factors:</strong> Temperature, humidity, and altitude can affect calorie burn</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-5 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Using Calorie Information Effectively</h3>
+                    <p>
+                        Here are some tips for using calorie burn information effectively:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Remember that calorie calculators provide estimates, not exact measurements</li>
+                        <li>Focus on consistency rather than occasional high-intensity workouts</li>
+                        <li>Combine increased physical activity with proper nutrition for best results</li>
+                        <li>For weight loss, aim for a moderate calorie deficit (500-750 calories per day)</li>
+                        <li>Track your progress over time rather than focusing on daily fluctuations</li>
+                    </ul>
+                    <p class="mt-2 text-yellow-400">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> Always consult with healthcare professionals before starting a new exercise program, especially if you have pre-existing health conditions.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How accurate is the calorie burn calculator?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        The calorie burn calculator provides an estimate based on average MET values for different activities. Individual factors like fitness level, efficiency of movement, and environmental conditions can affect actual calorie burn. For more precise measurements, consider using a heart rate monitor or fitness tracker that accounts for your personal metrics.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How many calories should I burn to lose weight?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        To lose one pound of weight, you need to create a deficit of approximately 3,500 calories. A safe and sustainable approach is to aim for a deficit of 500-750 calories per day through a combination of reduced calorie intake and increased physical activity. This would result in a weight loss of about 1-1.5 pounds per week. Remember that weight loss should be gradual and sustainable for long-term success.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Why do I burn fewer calories doing the same activity over time?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        As your body becomes more efficient at performing an activity, it requires less energy to do the same work. This is a normal adaptation to exercise. To continue challenging your body and burning calories at a similar rate, you can increase the intensity, duration, or frequency of your workouts, or incorporate variety by trying different types of activities.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Is it better to do longer, low-intensity workouts or shorter, high-intensity workouts?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Both approaches have benefits. Longer, low-intensity workouts (like walking) are generally easier to sustain, gentler on joints, and good for building endurance. Shorter, high-intensity workouts (like HIIT) can burn more calories in less time and may continue to burn calories after the workout through the "afterburn effect." The best approach is to incorporate both types into your fitness routine based on your goals, preferences, and physical condition.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">support@calchub.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">123 Calculator St, Math City, CA 90210</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Toggle FAQ answers
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>

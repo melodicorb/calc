@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight Converter - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/weight-converter.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-balance-scale text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Weight <span class="text-yellow-400">Converter</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Convert between different units of weight and mass with precision and ease.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Value to Convert</h2>
+                    <form id="weight-converter-form" class="space-y-6">
+                        <!-- Input Value -->
+                        <div class="mb-4">
+                            <label for="input-value" class="block text-white mb-2">Value</label>
+                            <input type="number" id="input-value" class="w-full bg-white bg-opacity-70 border border-white border-opacity-60 rounded-lg px-4 py-3 text-gray-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Enter a value" step="any" required>
+                        </div>
+                        
+                        <!-- From Unit -->
+                        <div class="mb-4">
+                            <label for="from-unit" class="block text-white mb-2">From</label>
+                            <select id="from-unit" class="w-full bg-white bg-opacity-70 border border-white border-opacity-60 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-400">
+                                <option value="kilogram">Kilogram (kg)</option>
+                                <option value="gram">Gram (g)</option>
+                                <option value="milligram">Milligram (mg)</option>
+                                <option value="microgram">Microgram (μg)</option>
+                                <option value="metric-ton">Metric Ton (t)</option>
+                                <option value="pound">Pound (lb)</option>
+                                <option value="ounce">Ounce (oz)</option>
+                                <option value="stone">Stone (st)</option>
+                                <option value="us-ton">US Ton (short ton)</option>
+                                <option value="imperial-ton">Imperial Ton (long ton)</option>
+                                <option value="carat">Carat (ct)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- To Unit -->
+                        <div class="mb-4">
+                            <label for="to-unit" class="block text-white mb-2">To</label>
+                            <select id="to-unit" class="w-full bg-white bg-opacity-70 border border-white border-opacity-60 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-green-400">
+                                <option value="kilogram">Kilogram (kg)</option>
+                                <option value="gram">Gram (g)</option>
+                                <option value="milligram">Milligram (mg)</option>
+                                <option value="microgram">Microgram (μg)</option>
+                                <option value="metric-ton">Metric Ton (t)</option>
+                                <option value="pound">Pound (lb)</option>
+                                <option value="ounce">Ounce (oz)</option>
+                                <option value="stone">Stone (st)</option>
+                                <option value="us-ton">US Ton (short ton)</option>
+                                <option value="imperial-ton">Imperial Ton (long ton)</option>
+                                <option value="carat">Carat (ct)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" id="convert-btn" class="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-green-700 hover:to-teal-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-exchange-alt mr-2"></i> Convert
+                        </button>
+                        
+                        <button type="button" id="swap-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-sync-alt mr-2"></i> Swap Units
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Conversion Result</h2>
+                    <div id="result" class="bg-white bg-opacity-20 rounded-lg p-6 border border-white border-opacity-40 min-h-[300px] shadow-md">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-balance-scale text-4xl text-yellow-400 mb-4"></i>
+                            <p class="text-white font-medium text-center">Enter a value and select units to convert</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Common Conversions -->
+                    <div class="mt-6 bg-white bg-opacity-20 rounded-lg p-6 border border-white border-opacity-40 shadow-md">
+                        <h3 class="text-xl font-bold text-white mb-4">Common Conversions</h3>
+                        <div id="common-conversions" class="grid grid-cols-1 gap-2 text-white font-medium">
+                            <p>1 kilogram = 1000 grams</p>
+                            <p>1 kilogram = 2.20462 pounds</p>
+                            <p>1 pound = 16 ounces</p>
+                            <p>1 stone = 14 pounds</p>
+                            <p>1 metric ton = 1000 kilograms</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Weight Units</h2>
+            
+            <div class="space-y-6 text-white">
+                <p>
+                    Weight units are used to measure the mass of objects. Different systems of measurement are used around the world, with the metric system being the most widely adopted international standard.
+                </p>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Metric System</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Metric Ton (t):</strong> 1,000 kilograms, used for very heavy objects</li>
+                        <li><strong>Kilogram (kg):</strong> The base unit of mass in the metric system</li>
+                        <li><strong>Gram (g):</strong> 1/1,000 of a kilogram, used for small items</li>
+                        <li><strong>Milligram (mg):</strong> 1/1,000 of a gram, used in medicine and science</li>
+                        <li><strong>Microgram (μg):</strong> 1/1,000,000 of a gram, used in laboratory settings</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Imperial/US System</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Imperial Ton (long ton):</strong> 2,240 pounds, used in the UK and Commonwealth countries</li>
+                        <li><strong>US Ton (short ton):</strong> 2,000 pounds, commonly used in the United States</li>
+                        <li><strong>Stone (st):</strong> 14 pounds, commonly used in the UK for body weight</li>
+                        <li><strong>Pound (lb):</strong> 16 ounces, the most common unit in the US</li>
+                        <li><strong>Ounce (oz):</strong> 1/16 of a pound, used for smaller weights</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Specialized Units</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Carat (ct):</strong> 0.2 grams, used for gemstones and precious metals</li>
+                        <li><strong>Grain:</strong> 1/7000 of a pound, used in ammunition and pharmaceuticals</li>
+                        <li><strong>Troy Ounce:</strong> About 31.1 grams, used for precious metals</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Tips for Weight Conversion</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>For cooking and baking, precise conversions between metric and imperial units are important</li>
+                        <li>In scientific contexts, always use metric units for consistency</li>
+                        <li>When measuring body weight, be aware of regional preferences (kg vs. lb vs. stone)</li>
+                        <li>For shipping and freight, understand the difference between metric tons and US/imperial tons</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>What's the difference between mass and weight?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Mass is a measure of the amount of matter in an object and remains constant regardless of location. Weight is the force exerted on an object due to gravity and can vary depending on location (e.g., on Earth vs. the Moon). In everyday usage, the terms are often used interchangeably, and our converter follows common convention by using "weight" for both concepts.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Why do the US and UK use different tons?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        The US ton (short ton) and the Imperial ton (long ton) evolved from different historical measurement systems. The Imperial ton equals 2,240 pounds and was based on the weight that a merchant ship could carry. The US ton equals 2,000 pounds and developed separately in American commerce. The metric ton (1,000 kg or about 2,204.6 pounds) is now the international standard.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How accurate are these weight conversions?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Our weight converter uses standard conversion factors that are accurate to multiple decimal places. For everyday use, these conversions are more than sufficient. For scientific or commercial applications requiring extreme precision, the converter maintains high accuracy, but users should always verify critical measurements with calibrated instruments.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Why is the stone unit used in the UK?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        The stone (14 pounds) has been used in Britain since the Middle Ages. It remained popular for measuring human body weight even after the UK officially adopted the metric system. It's a cultural preference that persists today, with many British people expressing their weight in stones and pounds (e.g., "11 stone 4 pounds") rather than just pounds or kilograms.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>What weight units should I use for cooking?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        For cooking, it's best to use the units specified in your recipe. US recipes typically use pounds and ounces, while recipes from most other countries use grams and kilograms. For precision baking, weight measurements (rather than volume) are preferred regardless of the unit system. Our converter can help you translate between recipe units when needed.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">support@calchub.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">123 Calculator St, Math City, CA 90210</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Mobile dropdown toggle
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            document.getElementById('mobile-dropdown').classList.toggle('hidden');
+        });
+        
+        // FAQ toggle function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>

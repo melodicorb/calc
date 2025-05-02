@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-heart text-4xl text-white animate-pulse"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Love <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">A fun calculator that determines the compatibility between two people based on their names. Just for entertainment!</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Input Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Names</h2>
+                    <form id="love-calculator-form" class="space-y-6">
+                        <div>
+                            <label for="first-name" class="block text-white mb-2">First Person's Name</label>
+                            <input type="text" id="first-name" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-pink-400" placeholder="Enter first name" required>
+                        </div>
+                        <div>
+                            <label for="second-name" class="block text-white mb-2">Second Person's Name</label>
+                            <input type="text" id="second-name" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-pink-400" placeholder="Enter second name" required>
+                        </div>
+                        <button type="button" onclick="calculateLove()" class="w-full bg-gradient-to-r from-pink-600 to-red-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-pink-700 hover:to-red-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-heart mr-2"></i> Calculate Love
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Love Compatibility</h2>
+                    <div id="love-result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[250px] flex items-center justify-center">
+                        <p class="text-gray-300 text-center">Enter two names to see your love compatibility</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">How It Works</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-pink-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Enter Both Names</h3>
+                            <p class="text-gray-300">Input the names of two people whose love compatibility you want to check. Make sure to spell the names correctly for the most accurate (and fun) results.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-pink-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">2</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">Our Algorithm Works Its Magic</h3>
+                            <p class="text-gray-300">Our special love algorithm analyzes the names and calculates a compatibility percentage. The algorithm looks at letter patterns, name meanings, and other fun factors.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 rounded-full bg-pink-500 flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-white">View Your Compatibility</h3>
+                            <p class="text-gray-300">See your love compatibility percentage and a fun message about your relationship potential. Remember, this is just for entertainment!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl">
+                <div class="space-y-4">
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Is this love calculator scientifically accurate?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            No, this love calculator is purely for entertainment purposes. It uses a fun algorithm based on the letters in both names to generate a compatibility percentage. It's not based on any scientific or psychological principles and should be taken as a lighthearted game rather than a serious assessment of relationship compatibility.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Will I get the same result every time?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Yes, for the same pair of names, you will get the same result every time. Our algorithm uses consistent calculations based on the letters in the names. However, even small changes like using nicknames or middle names can produce different results.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Should I make relationship decisions based on this calculator?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Absolutely not! This calculator is designed purely for fun and entertainment. Real relationships are complex and depend on many factors like communication, shared values, trust, and mutual respect. Never make important relationship decisions based on a fun online calculator.
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                            <span>Can I check compatibility between friends or family members?</span>
+                            <i class="fas fa-plus text-yellow-400"></i>
+                        </div>
+                        <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                            Yes! While it's called a "love" calculator, you can use it to check the name compatibility between any two people - friends, family members, colleagues, or even celebrities. It's all in good fun!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Container -->
+        <div class="ad-container mb-12">
+            <p class="text-center text-gray-400 mb-2">Advertisement</p>
+            <div class="h-20 md:h-40 bg-gray-800 bg-opacity-50 flex items-center justify-center rounded-lg">
+                <p class="text-gray-400">Google AdSense Banner</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300"><i class="fas fa-envelope mr-2 text-yellow-400"></i> contact@calchub.com</li>
+                        <li class="text-gray-300"><i class="fas fa-phone mr-2 text-yellow-400"></i> +1 (123) 456-7890</li>
+                        <li class="text-gray-300"><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i> 123 Calculator St, Math City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8 text-center">
+                <p class="text-gray-300">&copy; <span id="current-year"></span> CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+        const mobileDropdown = document.getElementById('mobile-dropdown');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileDropdownButton.addEventListener('click', () => {
+            mobileDropdown.classList.toggle('hidden');
+        });
+
+        // Love Calculator Function
+        function calculateLove() {
+            const firstName = document.getElementById('first-name').value.trim();
+            const secondName = document.getElementById('second-name').value.trim();
+            
+            if (!firstName || !secondName) {
+                alert('Please enter both names');
+                return;
+            }
+            
+            // Show loading animation
+            document.getElementById('love-result').innerHTML = `
+                <div class="flex flex-col items-center justify-center w-full">
+                    <div class="animate-pulse text-pink-500 text-6xl mb-4">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <p class="text-white">Calculating love compatibility...</p>
+                </div>
+            `;
+            
+            // Simulate calculation delay for better user experience
+            setTimeout(() => {
+                // Calculate love percentage (pseudo-random but consistent for same name pairs)
+                const lovePercentage = calculateLovePercentage(firstName, secondName);
+                
+                // Get love message based on percentage
+                const loveMessage = getLoveMessage(lovePercentage);
+                
+                // Create heart animation class based on percentage
+                let heartAnimationClass = "animate-pulse";
+                if (lovePercentage > 80) {
+                    heartAnimationClass = "animate-bounce";
+                } else if (lovePercentage < 30) {
+                    heartAnimationClass = "animate-ping";
+                }
+                
+                // Format the result
+                const resultHTML = `
+                    <div class="flex flex-col items-center justify-center w-full">
+                        <div class="mb-6 relative">
+                            <div class="text-6xl ${heartAnimationClass} text-pink-500">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-xl">
+                                ${lovePercentage}%
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <h3 class="text-2xl font-bold text-white mb-2">${firstName} & ${secondName}</h3>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                                <div class="bg-gradient-to-r from-pink-500 to-red-500 h-2.5 rounded-full" style="width: ${lovePercentage}%"></div>
+                            </div>
+                            <p class="text-white text-lg">${loveMessage}</p>
+                        </div>
+                        
+                        <button onclick="shareResult('${firstName}', '${secondName}', ${lovePercentage})" class="mt-4 bg-white bg-opacity-10 hover:bg-opacity-20 text-white py-2 px-4 rounded-lg transition-all duration-300">
+                            <i class="fas fa-share-alt mr-2"></i> Share Result
+                        </button>
+                    </div>
+                `;
+                
+                document.getElementById('love-result').innerHTML = resultHTML;
+                
+                // Save to calculation history
+                saveToHistory(
+                    'Love Calculator',
+                    `${firstName} & ${secondName}`,
+                    `${lovePercentage}% compatibility`
+                );
+            }, 1500); // 1.5 second delay for animation
+        }
+        
+        // Function to calculate love percentage (pseudo-random but consistent)
+        function calculateLovePercentage(name1, name2) {
+            // Combine the names and convert to lowercase
+            const combinedNames = (name1 + name2).toLowerCase();
+            
+            // Create a simple hash of the combined names
+            let hash = 0;
+            for (let i = 0; i < combinedNames.length; i++) {
+                hash = ((hash << 5) - hash) + combinedNames.charCodeAt(i);
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            
+            // Use the hash to generate a percentage between 1-100
+            const percentage = Math.abs(hash % 100) + 1;
+            
+            return percentage;
+        }
+        
+        // Function to get love message based on percentage
+        function getLoveMessage(percentage) {
+            if (percentage >= 90) {
+                return "Incredible match! You two are meant to be together!";
+            } else if (percentage >= 80) {
+                return "Amazing chemistry! This could be a wonderful relationship!";
+            } else if (percentage >= 70) {
+                return "Great potential! You have a strong connection.";
+            } else if (percentage >= 60) {
+                return "Good compatibility. You have potential for a nice relationship.";
+            } else if (percentage >= 50) {
+                return "Average compatibility. You might need to work on your relationship.";
+            } else if (percentage >= 40) {
+                return "Below average match. You'll need effort to make this work.";
+            } else if (percentage >= 30) {
+                return "Challenging match. You might be better as friends.";
+            } else if (percentage >= 20) {
+                return "Difficult compatibility. This relationship would need a lot of work.";
+            } else {
+                return "Not a great match. But remember, love can overcome anything!";
+            }
+        }
+        
+        // Function to share result
+        function shareResult(name1, name2, percentage) {
+            const text = `Love compatibility between ${name1} and ${name2} is ${percentage}%! Check your compatibility at CalcHub.`;
+            
+            // Try to use Web Share API if available
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Love Calculator Result',
+                    text: text,
+                    url: window.location.href,
+                })
+                .catch(error => {
+                    console.error('Error sharing:', error);
+                    copyToClipboard(text);
+                });
+            } else {
+                // Fallback to copy to clipboard
+                copyToClipboard(text);
+            }
+        }
+    </script>
+</body>
+</html>

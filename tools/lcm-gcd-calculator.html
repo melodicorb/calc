@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCM & GCD Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/lcm-gcd-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-divide text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">LCM & GCD <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate the Least Common Multiple and Greatest Common Divisor of multiple numbers.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Input Section -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4">Enter Numbers</h2>
+                    <div id="number-inputs" class="space-y-4">
+                        <div class="number-input-group">
+                            <label class="block text-white mb-2">Number 1</label>
+                            <input type="number" class="number-input w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Enter a positive integer" min="1" required>
+                        </div>
+                        <div class="number-input-group">
+                            <label class="block text-white mb-2">Number 2</label>
+                            <input type="number" class="number-input w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Enter a positive integer" min="1" required>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2 mt-4">
+                        <button id="add-number-btn" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition-all duration-300">
+                            <i class="fas fa-plus mr-2"></i> Add Number
+                        </button>
+                        <button id="remove-number-btn" class="bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-700 transition-all duration-300" disabled>
+                            <i class="fas fa-minus mr-2"></i> Remove
+                        </button>
+                    </div>
+                    
+                    <div class="flex space-x-2 mt-6">
+                        <button id="calculate-btn" class="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate
+                        </button>
+                        <button id="clear-btn" class="bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-700 transition-all duration-300">
+                            <i class="fas fa-trash-alt mr-2"></i> Clear
+                        </button>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <button id="sample-data-btn" class="text-gray-300 text-sm hover:text-white transition">
+                            <i class="fas fa-lightbulb mr-1"></i> Use sample data
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-4">Results</h2>
+                    <div id="results" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[300px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-calculator text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter numbers and click Calculate to see the results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Explanation Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">LCM & GCD Explained</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- LCM Explanation -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Least Common Multiple (LCM)</h3>
+                    <p class="text-gray-200 mb-2">The smallest positive number that is divisible by all the given numbers without a remainder.</p>
+                    <div class="bg-white bg-opacity-5 p-3 rounded">
+                        <p class="text-gray-300">For numbers a and b, LCM is the smallest positive number that is a multiple of both a and b.</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Example: LCM of 4 and 6 is 12, as 12 is the smallest number divisible by both 4 and 6.</p>
+                </div>
+                
+                <!-- GCD Explanation -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Greatest Common Divisor (GCD)</h3>
+                    <p class="text-gray-200 mb-2">The largest positive integer that divides all the given numbers without a remainder.</p>
+                    <div class="bg-white bg-opacity-5 p-3 rounded">
+                        <p class="text-gray-300">For numbers a and b, GCD is the largest positive integer that divides both a and b without a remainder.</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Example: GCD of 12 and 18 is 6, as 6 is the largest number that divides both 12 and 18.</p>
+                </div>
+                
+                <!-- Calculation Method -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Calculation Methods</h3>
+                    <p class="text-gray-200 mb-2">This calculator uses efficient algorithms to find LCM and GCD:</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>Euclidean algorithm for GCD</li>
+                        <li>LCM calculation using the formula: LCM(a,b) = (a × b) / GCD(a,b)</li>
+                        <li>For multiple numbers, calculations are done pairwise</li>
+                    </ul>
+                </div>
+                
+                <!-- Applications -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Applications</h3>
+                    <p class="text-gray-200 mb-2">LCM and GCD have many practical applications:</p>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>Fractions: Finding common denominators (LCM)</li>
+                        <li>Simplifying fractions (GCD)</li>
+                        <li>Cryptography and number theory</li>
+                        <li>Scheduling and timing problems</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Tips & Notes</h2>
+            
+            <ul class="list-disc list-inside space-y-3 text-gray-200">
+                <li>Enter positive integers only. Decimal numbers will be truncated to integers.</li>
+                <li>You can calculate LCM and GCD for up to 10 numbers at once.</li>
+                <li>The GCD of any number and 0 is the number itself.</li>
+                <li>The LCM of any number and 0 is 0.</li>
+                <li>For very large numbers, calculations might take longer to process.</li>
+                <li>The calculator can handle numbers up to 10^15 (one quadrillion).</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-900 bg-opacity-50 py-8 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="text-white text-2xl font-bold flex items-center">
+                        <span class="text-yellow-400">Calc</span>Hub
+                    </a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <hr class="border-indigo-800 my-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 CalcHub. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            document.getElementById('mobile-dropdown').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/length-converter.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-ruler text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Length <span class="text-yellow-400">Converter</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Convert between different units of length with precision and ease.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Value to Convert</h2>
+                    <form id="length-converter-form" class="space-y-6">
+                        <!-- Input Value -->
+                        <div class="mb-4">
+                            <label for="input-value" class="block text-white mb-2">Value</label>
+                            <input type="number" id="input-value" class="w-full bg-white bg-opacity-30 border border-white border-opacity-40 rounded-lg px-4 py-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter a value" step="any" required>
+                        </div>
+                        
+                        <!-- From Unit -->
+                        <div class="mb-4">
+                            <label for="from-unit" class="block text-white mb-2">From</label>
+                            <select id="from-unit" class="w-full bg-white bg-opacity-30 border border-white border-opacity-40 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="meter" class="bg-purple-800 text-white">Meter (m)</option>
+                                <option value="kilometer" class="bg-purple-800 text-white">Kilometer (km)</option>
+                                <option value="centimeter" class="bg-purple-800 text-white">Centimeter (cm)</option>
+                                <option value="millimeter" class="bg-purple-800 text-white">Millimeter (mm)</option>
+                                <option value="micrometer" class="bg-purple-800 text-white">Micrometer (μm)</option>
+                                <option value="nanometer" class="bg-purple-800 text-white">Nanometer (nm)</option>
+                                <option value="mile" class="bg-purple-800 text-white">Mile (mi)</option>
+                                <option value="yard" class="bg-purple-800 text-white">Yard (yd)</option>
+                                <option value="foot" class="bg-purple-800 text-white">Foot (ft)</option>
+                                <option value="inch" class="bg-purple-800 text-white">Inch (in)</option>
+                                <option value="nautical-mile" class="bg-purple-800 text-white">Nautical Mile (nmi)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- To Unit -->
+                        <div class="mb-4">
+                            <label for="to-unit" class="block text-white mb-2">To</label>
+                            <select id="to-unit" class="w-full bg-white bg-opacity-30 border border-white border-opacity-40 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
+                                <option value="meter" class="bg-purple-800 text-white">Meter (m)</option>
+                                <option value="kilometer" class="bg-purple-800 text-white">Kilometer (km)</option>
+                                <option value="centimeter" class="bg-purple-800 text-white">Centimeter (cm)</option>
+                                <option value="millimeter" class="bg-purple-800 text-white">Millimeter (mm)</option>
+                                <option value="micrometer" class="bg-purple-800 text-white">Micrometer (μm)</option>
+                                <option value="nanometer" class="bg-purple-800 text-white">Nanometer (nm)</option>
+                                <option value="mile" class="bg-purple-800 text-white">Mile (mi)</option>
+                                <option value="yard" class="bg-purple-800 text-white">Yard (yd)</option>
+                                <option value="foot" class="bg-purple-800 text-white">Foot (ft)</option>
+                                <option value="inch" class="bg-purple-800 text-white">Inch (in)</option>
+                                <option value="nautical-mile" class="bg-purple-800 text-white">Nautical Mile (nmi)</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" id="convert-btn" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-exchange-alt mr-2"></i> Convert
+                        </button>
+                        
+                        <button type="button" id="swap-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-sync-alt mr-2"></i> Swap Units
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Conversion Result</h2>
+                    <div id="result" class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20 min-h-[300px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-ruler text-4xl text-yellow-300 mb-4"></i>
+                            <p class="text-white text-center">Enter a value and select units to convert</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Common Conversions -->
+                    <div class="mt-6 bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-20">
+                        <h3 class="text-xl font-bold text-white mb-4">Common Conversions</h3>
+                        <div id="common-conversions" class="grid grid-cols-1 gap-2 text-white">
+                            <p>1 meter = 100 centimeters</p>
+                            <p>1 meter = 3.28084 feet</p>
+                            <p>1 kilometer = 0.621371 miles</p>
+                            <p>1 inch = 2.54 centimeters</p>
+                            <p>1 foot = 0.3048 meters</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Length Units</h2>
+            
+            <div class="space-y-6 text-white">
+                <p>
+                    Length units are used to measure distance, height, width, and other linear dimensions. Different systems of measurement are used around the world, with the metric system being the most widely adopted international standard.
+                </p>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Metric System</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Kilometer (km):</strong> 1,000 meters, used for long distances</li>
+                        <li><strong>Meter (m):</strong> The base unit of length in the metric system</li>
+                        <li><strong>Centimeter (cm):</strong> 1/100 of a meter, used for small measurements</li>
+                        <li><strong>Millimeter (mm):</strong> 1/1,000 of a meter, used for precise small measurements</li>
+                        <li><strong>Micrometer (μm):</strong> 1/1,000,000 of a meter, used in scientific and engineering applications</li>
+                        <li><strong>Nanometer (nm):</strong> 1/1,000,000,000 of a meter, used in nanotechnology and physics</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Imperial/US System</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Mile (mi):</strong> 5,280 feet, used for long distances</li>
+                        <li><strong>Yard (yd):</strong> 3 feet or 36 inches</li>
+                        <li><strong>Foot (ft):</strong> 12 inches, common in architecture and construction</li>
+                        <li><strong>Inch (in):</strong> The smallest commonly used unit in the imperial system</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Maritime Units</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong>Nautical Mile (nmi):</strong> Approximately 1.852 kilometers, used in marine and air navigation</li>
+                        <li><strong>Fathom:</strong> 6 feet, traditionally used for measuring water depth</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Tips for Length Conversion</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>When converting between systems, remember that precision matters for technical applications</li>
+                        <li>For everyday conversions, rounded values are often sufficient</li>
+                        <li>When working internationally, the metric system is the standard</li>
+                        <li>Construction and engineering often use mixed units (e.g., feet and inches)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Why are there different systems of length measurement?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Different systems of measurement evolved independently across civilizations. The imperial system originated in England and spread through the British Empire, while the metric system was developed in France during the French Revolution as a standardized, decimal-based system. Today, most countries use the metric system, with the United States being a notable exception where the imperial system is still commonly used in everyday life.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How accurate are these length conversions?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Our length converter uses standard conversion factors that are accurate to multiple decimal places. For everyday use, these conversions are more than sufficient. For scientific or engineering applications requiring extreme precision, the converter maintains high accuracy, but users should always verify critical measurements with specialized tools.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>What is the difference between a mile and a nautical mile?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        A statute mile (the common mile) is 5,280 feet or about 1.609 kilometers, based on historical land measurements. A nautical mile is approximately 1.852 kilometers and was defined as one minute of latitude along any meridian. Nautical miles are used in maritime and aviation contexts because they conveniently relate to coordinates on navigation charts.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Why do scientists use the metric system?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Scientists worldwide use the metric system (SI units) because it offers several advantages: it's decimal-based, making calculations simpler; units are related by powers of 10; it has standardized prefixes (kilo-, milli-, etc.); and it's used globally, facilitating international collaboration. The system also maintains coherent relationships between different types of measurements (length, mass, volume, etc.).
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How do I convert between feet and inches?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        To convert feet to inches, multiply the number of feet by 12. For example, 5 feet = 5 × 12 = 60 inches. To convert inches to feet, divide the number of inches by 12. For example, 30 inches = 30 ÷ 12 = 2.5 feet. Our converter handles these calculations automatically, but understanding the relationship (1 foot = 12 inches) is useful for everyday estimations.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">support@calchub.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">123 Calculator St, Math City, CA 90210</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Mobile dropdown toggle
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            document.getElementById('mobile-dropdown').classList.toggle('hidden');
+        });
+        
+        // FAQ toggle function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>

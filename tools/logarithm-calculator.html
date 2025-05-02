@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logarithm Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/logarithm-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-superscript text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Logarithm <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate logarithms with different bases, natural logarithms, and common logarithms.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Tabs -->
+                <div>
+                    <div class="flex mb-6 bg-white bg-opacity-5 rounded-lg overflow-hidden">
+                        <button id="tab-common" class="flex-1 py-3 px-4 text-white font-semibold text-center tab-active">Common Log</button>
+                        <button id="tab-natural" class="flex-1 py-3 px-4 text-white font-semibold text-center">Natural Log</button>
+                        <button id="tab-custom" class="flex-1 py-3 px-4 text-white font-semibold text-center">Custom Base</button>
+                    </div>
+                    
+                    <!-- Common Logarithm (Base 10) -->
+                    <div id="calc-common" class="calc-section">
+                        <h2 class="text-2xl font-bold text-white mb-4">Common Logarithm (Base 10)</h2>
+                        <form id="common-log-form" class="space-y-4">
+                            <div>
+                                <label for="common-value" class="block text-white mb-2">Number (x)</label>
+                                <input type="number" id="common-value" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter a positive number" step="any" min="0.000001" required>
+                            </div>
+                            <button type="button" id="calculate-common-btn" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate log₁₀(x)
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Natural Logarithm (Base e) -->
+                    <div id="calc-natural" class="calc-section hidden">
+                        <h2 class="text-2xl font-bold text-white mb-4">Natural Logarithm (Base e)</h2>
+                        <form id="natural-log-form" class="space-y-4">
+                            <div>
+                                <label for="natural-value" class="block text-white mb-2">Number (x)</label>
+                                <input type="number" id="natural-value" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter a positive number" step="any" min="0.000001" required>
+                            </div>
+                            <button type="button" id="calculate-natural-btn" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate ln(x)
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Custom Base Logarithm -->
+                    <div id="calc-custom" class="calc-section hidden">
+                        <h2 class="text-2xl font-bold text-white mb-4">Custom Base Logarithm</h2>
+                        <form id="custom-log-form" class="space-y-4">
+                            <div>
+                                <label for="custom-base" class="block text-white mb-2">Base (b)</label>
+                                <input type="number" id="custom-base" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter a positive number (not 1)" step="any" min="0.000001" required>
+                            </div>
+                            <div>
+                                <label for="custom-value" class="block text-white mb-2">Number (x)</label>
+                                <input type="number" id="custom-value" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter a positive number" step="any" min="0.000001" required>
+                            </div>
+                            <button type="button" id="calculate-custom-btn" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate log_b(x)
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Result</h2>
+                    <div id="logarithm-result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[300px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-calculator text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter values and click Calculate to see the result</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logarithm Explanation Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Understanding Logarithms</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Basic Definition -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">What is a Logarithm?</h3>
+                    <p class="text-gray-200 mb-2">A logarithm is the power to which a number (the base) must be raised to produce a given number.</p>
+                    <div class="bg-white bg-opacity-5 p-3 rounded">
+                        <p class="text-gray-300 font-mono">If b^y = x, then log_b(x) = y</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Example: log₁₀(100) = 2 because 10² = 100</p>
+                </div>
+                
+                <!-- Common Logarithm -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Common Logarithm (Base 10)</h3>
+                    <p class="text-gray-200 mb-2">The logarithm with base 10, often written as log(x) without an explicit base.</p>
+                    <div class="bg-white bg-opacity-5 p-3 rounded">
+                        <p class="text-gray-300 font-mono">log₁₀(x) or simply log(x)</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Used in engineering, physics, and for measuring quantities that vary over many orders of magnitude.</p>
+                </div>
+                
+                <!-- Natural Logarithm -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Natural Logarithm (Base e)</h3>
+                    <p class="text-gray-200 mb-2">The logarithm with base e (≈ 2.71828), written as ln(x).</p>
+                    <div class="bg-white bg-opacity-5 p-3 rounded">
+                        <p class="text-gray-300 font-mono">ln(x) = log_e(x)</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mt-2">Used in calculus, statistics, and for describing natural growth and decay processes.</p>
+                </div>
+                
+                <!-- Logarithm Properties -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Logarithm Properties</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>log_b(xy) = log_b(x) + log_b(y)</li>
+                        <li>log_b(x/y) = log_b(x) - log_b(y)</li>
+                        <li>log_b(x^n) = n × log_b(x)</li>
+                        <li>log_b(1) = 0</li>
+                        <li>log_b(b) = 1</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Applications Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Applications of Logarithms</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Science & Engineering -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Science & Engineering</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>pH scale in chemistry</li>
+                        <li>Decibel scale for sound intensity</li>
+                        <li>Richter scale for earthquake magnitude</li>
+                        <li>Stellar magnitude in astronomy</li>
+                    </ul>
+                </div>
+                
+                <!-- Mathematics & Computing -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Mathematics & Computing</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>Algorithm complexity analysis</li>
+                        <li>Information theory and entropy</li>
+                        <li>Number theory and cryptography</li>
+                        <li>Data compression techniques</li>
+                    </ul>
+                </div>
+                
+                <!-- Finance & Economics -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Finance & Economics</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>Compound interest calculations</li>
+                        <li>Economic growth modeling</li>
+                        <li>Financial market analysis</li>
+                        <li>Depreciation calculations</li>
+                    </ul>
+                </div>
+                
+                <!-- Biology & Medicine -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Biology & Medicine</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-300">
+                        <li>Population growth models</li>
+                        <li>Drug absorption rates</li>
+                        <li>Radioactive decay calculations</li>
+                        <li>Bacterial growth analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-900 bg-opacity-50 py-8 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="text-white text-2xl font-bold flex items-center">
+                        <span class="text-yellow-400">Calc</span>Hub
+                    </a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <hr class="border-indigo-800 my-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 CalcHub. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            document.getElementById('mobile-dropdown').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

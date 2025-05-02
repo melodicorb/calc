@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <img src="../images/calchub-logo.svg" alt="CalcHub Logo" class="h-10 mr-2">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="./mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="./finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="./health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="./conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="./utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="./featured-tools.html" class="text-white hover:text-yellow-400 transition">Featured Tools</a>
+                    <a href="./about.html" class="text-white hover:text-yellow-400 transition text-yellow-400">About Us</a>
+                    <a href="./contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="./mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="./finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="./health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="./conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="./utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="./featured-tools.html" class="block text-white py-2 hover:text-yellow-400">Featured Tools</a>
+                <a href="./about.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">About Us</a>
+                <a href="./contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-16">
+            <div class="mx-auto mb-6 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full w-20 h-20 flex items-center justify-center">
+                <i class="fas fa-info-circle text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">About <span class="text-yellow-400">CalcHub</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Your trusted platform for all types of calculators and tools to make your calculations easier and more efficient.</p>
+        </section>
+
+        <!-- About Us Content -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 border border-white border-opacity-20 shadow-xl">
+                <h2 class="text-3xl font-bold text-white mb-6">Our <span class="text-yellow-400">Mission</span></h2>
+                <p class="text-gray-200 mb-4">At CalcHub, our mission is to provide free, accurate, and user-friendly calculation tools for everyone. We believe that access to reliable calculation tools should be available to all, regardless of technical expertise or financial resources.</p>
+                <p class="text-gray-200 mb-4">We strive to create a comprehensive platform that covers a wide range of calculation needs - from simple arithmetic to complex financial planning, health metrics, unit conversions, and more.</p>
+                <p class="text-gray-200">Our goal is to continually expand our collection of tools while maintaining the highest standards of accuracy, usability, and accessibility.</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 border border-white border-opacity-20 shadow-xl">
+                <h2 class="text-3xl font-bold text-white mb-6">Our <span class="text-yellow-400">Story</span></h2>
+                <p class="text-gray-200 mb-4">CalcHub was founded in 2023 by a team of mathematics enthusiasts and web developers who recognized the need for a centralized platform offering various calculation tools.</p>
+                <p class="text-gray-200 mb-4">What started as a small project with just a few basic calculators has grown into a comprehensive platform with dozens of specialized tools across multiple categories.</p>
+                <p class="text-gray-200">Today, CalcHub serves thousands of users worldwide, helping students, professionals, and everyday users solve calculation problems quickly and accurately.</p>
+            </div>
+        </section>
+
+        <!-- Our Values -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Our <span class="text-yellow-400">Values</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl text-center">
+                    <div class="h-20 w-20 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-check-circle text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Accuracy</h3>
+                    <p class="text-gray-200">We prioritize precision in all our calculators, ensuring that you receive reliable results for all your calculations.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl text-center">
+                    <div class="h-20 w-20 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-users text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Accessibility</h3>
+                    <p class="text-gray-200">We believe in making calculation tools accessible to everyone, regardless of technical expertise or device.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl text-center">
+                    <div class="h-20 w-20 mx-auto mb-4 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Innovation</h3>
+                    <p class="text-gray-200">We continuously improve our tools and add new calculators to meet the evolving needs of our users.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Meet Our <span class="text-yellow-400">Team</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl text-center">
+                    <div class="h-24 w-24 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Alex Johnson</h3>
+                    <p class="text-yellow-400 mb-3">Founder & Lead Developer</p>
+                    <p class="text-gray-200 mb-4">Mathematics enthusiast with a passion for creating user-friendly calculation tools.</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl text-center">
+                    <div class="h-24 w-24 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Sarah Chen</h3>
+                    <p class="text-yellow-400 mb-3">UI/UX Designer</p>
+                    <p class="text-gray-200 mb-4">Creative designer focused on creating beautiful and intuitive user interfaces.</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-white border-opacity-20 shadow-xl text-center">
+                    <div class="h-24 w-24 mx-auto mb-4 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">Michael Rodriguez</h3>
+                    <p class="text-yellow-400 mb-3">Mathematics Specialist</p>
+                    <p class="text-gray-200 mb-4">Mathematics professor ensuring the accuracy of all calculation formulas.</p>
+                    <div class="flex justify-center space-x-3">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fas fa-graduation-cap"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center mb-16">
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 border border-white border-opacity-20 shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Calculating?</h2>
+                <p class="text-xl text-gray-200 mb-8">Explore our wide range of calculators and make your calculations easier and more efficient.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="../index.html" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Calculators</a>
+                    <a href="./contact.html" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:bg-opacity-10 transition-all duration-300">Contact Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="./featured-tools.html" class="text-gray-300 hover:text-yellow-400 transition">Featured Tools</a></li>
+                        <li><a href="./about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="./contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="./privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="./finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="./health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="./conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="./utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300"><i class="fas fa-envelope mr-2 text-yellow-400"></i> contact@calchub.com</li>
+                        <li class="text-gray-300"><i class="fas fa-phone mr-2 text-yellow-400"></i> +1 (123) 456-7890</li>
+                        <li class="text-gray-300"><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i> 123 Calculator St, Math City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8 text-center">
+                <p class="text-gray-300">&copy; <span id="current-year"></span> CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            if (mobileDropdownButton && mobileDropdown) {
+                mobileDropdownButton.addEventListener('click', function() {
+                    mobileDropdown.classList.toggle('hidden');
+                    const icon = this.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                });
+            }
+        });
+
+        // FAQ toggle function
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>

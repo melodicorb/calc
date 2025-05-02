@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area & Perimeter Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/area-perimeter-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-border-all text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Area & Perimeter <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate the area and perimeter of various geometric shapes with ease.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Tabs -->
+                <div>
+                    <div class="flex mb-6 bg-white bg-opacity-5 rounded-lg overflow-hidden">
+                        <button id="tab-square" class="flex-1 py-3 px-4 text-white font-semibold text-center tab-active">Square</button>
+                        <button id="tab-rectangle" class="flex-1 py-3 px-4 text-white font-semibold text-center">Rectangle</button>
+                        <button id="tab-circle" class="flex-1 py-3 px-4 text-white font-semibold text-center">Circle</button>
+                        <button id="tab-triangle" class="flex-1 py-3 px-4 text-white font-semibold text-center">Triangle</button>
+                    </div>
+                    
+                    <!-- Square Calculator -->
+                    <div id="calc-square" class="calc-section">
+                        <h2 class="text-2xl font-bold text-white mb-4">Square Calculator</h2>
+                        <form id="square-form" class="space-y-4">
+                            <div>
+                                <label for="square-side" class="block text-white mb-2">Side Length</label>
+                                <input type="number" id="square-side" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter side length" required>
+                            </div>
+                            <button type="button" id="calculate-square-btn" class="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Rectangle Calculator -->
+                    <div id="calc-rectangle" class="calc-section hidden">
+                        <h2 class="text-2xl font-bold text-white mb-4">Rectangle Calculator</h2>
+                        <form id="rectangle-form" class="space-y-4">
+                            <div>
+                                <label for="rectangle-length" class="block text-white mb-2">Length</label>
+                                <input type="number" id="rectangle-length" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter length" required>
+                            </div>
+                            <div>
+                                <label for="rectangle-width" class="block text-white mb-2">Width</label>
+                                <input type="number" id="rectangle-width" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter width" required>
+                            </div>
+                            <button type="button" id="calculate-rectangle-btn" class="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Circle Calculator -->
+                    <div id="calc-circle" class="calc-section hidden">
+                        <h2 class="text-2xl font-bold text-white mb-4">Circle Calculator</h2>
+                        <form id="circle-form" class="space-y-4">
+                            <div>
+                                <label for="circle-radius" class="block text-white mb-2">Radius</label>
+                                <input type="number" id="circle-radius" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter radius" required>
+                            </div>
+                            <button type="button" id="calculate-circle-btn" class="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Triangle Calculator -->
+                    <div id="calc-triangle" class="calc-section hidden">
+                        <h2 class="text-2xl font-bold text-white mb-4">Triangle Calculator</h2>
+                        <form id="triangle-form" class="space-y-4">
+                            <div>
+                                <label for="triangle-side1" class="block text-white mb-2">Side 1</label>
+                                <input type="number" id="triangle-side1" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter side 1" required>
+                            </div>
+                            <div>
+                                <label for="triangle-side2" class="block text-white mb-2">Side 2</label>
+                                <input type="number" id="triangle-side2" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter side 2" required>
+                            </div>
+                            <div>
+                                <label for="triangle-side3" class="block text-white mb-2">Side 3</label>
+                                <input type="number" id="triangle-side3" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter side 3" required>
+                            </div>
+                            <button type="button" id="calculate-triangle-btn" class="w-full bg-gradient-to-r from-yellow-600 to-orange-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-yellow-700 hover:to-orange-700 transition-all duration-300 transform hover:scale-105">
+                                <i class="fas fa-calculator mr-2"></i> Calculate
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Result</h2>
+                    <div id="area-perimeter-result" class="bg-white bg-opacity-5 rounded-lg p-6 border border-white border-opacity-10 min-h-[300px]">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-calculator text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-300 text-center">Enter values and click Calculate to see the result</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formula Reference Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Formula Reference</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Square Formulas -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Square</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-200"><span class="font-semibold">Area:</span> A = s²</p>
+                        <p class="text-gray-200"><span class="font-semibold">Perimeter:</span> P = 4s</p>
+                        <p class="text-gray-200 text-sm">Where s is the side length</p>
+                    </div>
+                </div>
+                
+                <!-- Rectangle Formulas -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Rectangle</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-200"><span class="font-semibold">Area:</span> A = l × w</p>
+                        <p class="text-gray-200"><span class="font-semibold">Perimeter:</span> P = 2(l + w)</p>
+                        <p class="text-gray-200 text-sm">Where l is length and w is width</p>
+                    </div>
+                </div>
+                
+                <!-- Circle Formulas -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Circle</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-200"><span class="font-semibold">Area:</span> A = πr²</p>
+                        <p class="text-gray-200"><span class="font-semibold">Circumference:</span> C = 2πr</p>
+                        <p class="text-gray-200 text-sm">Where r is radius and π ≈ 3.14159</p>
+                    </div>
+                </div>
+                
+                <!-- Triangle Formulas -->
+                <div class="bg-white bg-opacity-5 rounded-lg p-4 border border-white border-opacity-10">
+                    <h3 class="text-xl font-bold text-white mb-3">Triangle</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-200"><span class="font-semibold">Area:</span> A = √(s(s-a)(s-b)(s-c))</p>
+                        <p class="text-gray-200"><span class="font-semibold">Perimeter:</span> P = a + b + c</p>
+                        <p class="text-gray-200 text-sm">Where a, b, c are sides and s = (a+b+c)/2</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Tips & Notes</h2>
+            
+            <ul class="list-disc list-inside space-y-3 text-gray-200">
+                <li>All measurements should be in the same unit (e.g., cm, m, in, ft).</li>
+                <li>For triangles, make sure the sides can form a valid triangle (sum of any two sides must be greater than the third side).</li>
+                <li>Results are rounded to 2 decimal places for better readability.</li>
+                <li>For more complex shapes, consider breaking them down into simpler shapes and calculating separately.</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-indigo-900 bg-opacity-50 py-8 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <a href="../index.html" class="text-white text-2xl font-bold flex items-center">
+                        <span class="text-yellow-400">Calc</span>Hub
+                    </a>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <hr class="border-indigo-800 my-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 CalcHub. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-sm transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.getElementById('mobile-dropdown-button').addEventListener('click', function() {
+            document.getElementById('mobile-dropdown').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

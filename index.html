@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalcHub - Multi-Tool Calculator Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="text-white text-3xl font-bold flex items-center">
+                    <img src="./images/calchub-logo.svg" alt="CalcHub Logo" class="h-10 mr-2">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="./pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="./pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="./pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Health</a>
+                            <a href="./pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="./pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="./pages/featured-tools.html" class="text-white hover:text-yellow-400 transition">Featured Tools</a>
+                    <a href="./pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="./pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="./pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="./pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="./pages/health.html" class="block text-white py-2 hover:text-yellow-400">Health</a>
+                    <a href="./pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="./pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="./pages/featured-tools.html" class="block text-white py-2 hover:text-yellow-400">Featured Tools</a>
+                <a href="./pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="./pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">Welcome to <span class="text-yellow-400">CalcHub</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Your all-in-one platform for interactive calculators and tools. Explore our wide range of calculators designed to make your calculations easier and more efficient.</p>
+        </section>
+
+        <!-- Calculator Categories -->
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            <!-- Mathematics Category -->
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 transform hover:scale-105 transition-all duration-300 border border-white border-opacity-20 shadow-xl">
+                <div class="category-icon mathematics-icon mb-4"></div>
+                <h2 class="text-2xl font-bold text-white mb-3">Mathematics</h2>
+                <p class="text-gray-200 mb-4">Explore our collection of mathematical calculators for all your computation needs.</p>
+                <ul class="text-gray-200 mb-6 space-y-2">
+                    <li><i class="fas fa-calculator mr-2 text-yellow-400"></i>Basic Calculator</li>
+                    <li><i class="fas fa-square-root-alt mr-2 text-yellow-400"></i>Scientific Calculator</li>
+                    <li><i class="fas fa-percentage mr-2 text-yellow-400"></i>Percentage Calculator</li>
+                    <li><i class="fas fa-border-all mr-2 text-yellow-400"></i>Area & Perimeter</li>
+                    <li><i class="fas fa-sort-numeric-up mr-2 text-yellow-400"></i>Average & Median</li>
+                </ul>
+                <a href="./pages/mathematics.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Tools</a>
+            </div>
+
+            <!-- Finance Category -->
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 transform hover:scale-105 transition-all duration-300 border border-white border-opacity-20 shadow-xl">
+                <div class="category-icon finance-icon mb-4"></div>
+                <h2 class="text-2xl font-bold text-white mb-3">Finance</h2>
+                <p class="text-gray-200 mb-4">Financial calculators to help you make informed money decisions.</p>
+                <ul class="text-gray-200 mb-6 space-y-2">
+                    <li><i class="fas fa-coins mr-2 text-yellow-400"></i>Interest Calculator</li>
+                    <li><i class="fas fa-home mr-2 text-yellow-400"></i>Loan EMI Calculator</li>
+                    <li><i class="fas fa-exchange-alt mr-2 text-yellow-400"></i>Currency Converter</li>
+                    <li><i class="fas fa-chart-line mr-2 text-yellow-400"></i>Investment Profit</li>
+                </ul>
+                <a href="./pages/finance.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Tools</a>
+            </div>
+
+            <!-- Health Category -->
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 transform hover:scale-105 transition-all duration-300 border border-white border-opacity-20 shadow-xl">
+                <div class="category-icon health-icon mb-4"></div>
+                <h2 class="text-2xl font-bold text-white mb-3">Health</h2>
+                <p class="text-gray-200 mb-4">Tools to help you track and maintain your health and fitness.</p>
+                <ul class="text-gray-200 mb-6 space-y-2">
+                    <li><i class="fas fa-weight mr-2 text-yellow-400"></i>BMI Calculator</li>
+                    <li><i class="fas fa-fire mr-2 text-yellow-400"></i>Calorie Burn Calculator</li>
+                    <li><i class="fas fa-tint mr-2 text-yellow-400"></i>Water Intake Calculator</li>
+                    <li><i class="fas fa-heartbeat mr-2 text-yellow-400"></i>Heart Rate Calculator</li>
+                </ul>
+                <a href="./pages/health.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Tools</a>
+            </div>
+
+            <!-- Unit Conversion Category -->
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 transform hover:scale-105 transition-all duration-300 border border-white border-opacity-20 shadow-xl">
+                <div class="category-icon conversion-icon mb-4"></div>
+                <h2 class="text-2xl font-bold text-white mb-3">Unit Conversion</h2>
+                <p class="text-gray-200 mb-4">Convert between different units of measurement with ease.</p>
+                <ul class="text-gray-200 mb-6 space-y-2">
+                    <li><i class="fas fa-ruler mr-2 text-yellow-400"></i>Length Converter</li>
+                    <li><i class="fas fa-balance-scale mr-2 text-yellow-400"></i>Weight Converter</li>
+                    <li><i class="fas fa-thermometer-half mr-2 text-yellow-400"></i>Temperature Converter</li>
+                    <li><i class="fas fa-clock mr-2 text-yellow-400"></i>Time Converter</li>
+                </ul>
+                <a href="./pages/conversion.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Tools</a>
+            </div>
+
+            <!-- Other Utilities Category -->
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 transform hover:scale-105 transition-all duration-300 border border-white border-opacity-20 shadow-xl">
+                <div class="category-icon utilities-icon mb-4"></div>
+                <h2 class="text-2xl font-bold text-white mb-3">Other Utilities</h2>
+                <p class="text-gray-200 mb-4">Additional useful tools for everyday calculations and tasks.</p>
+                <ul class="text-gray-200 mb-6 space-y-2">
+                    <li><i class="fas fa-birthday-cake mr-2 text-yellow-400"></i>Age Calculator</li>
+                    <li><i class="fas fa-heart mr-2 text-yellow-400"></i>Love Calculator</li>
+                    <li><i class="fas fa-qrcode mr-2 text-yellow-400"></i>QR Code Generator</li>
+                    <li><i class="fas fa-lock mr-2 text-yellow-400"></i>Password Strength</li>
+                    <li><i class="fas fa-calendar-alt mr-2 text-yellow-400"></i>Date Difference</li>
+                </ul>
+                <a href="./pages/utilities.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-2 px-6 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Tools</a>
+            </div>
+
+            <!-- Featured Tools Section -->
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 transform hover:scale-105 transition-all duration-300 border border-white border-opacity-20 shadow-xl">
+                <div class="featured-icon mb-4"></div>
+                <h2 class="text-2xl font-bold text-white mb-3">Featured Tools</h2>
+                <p class="text-gray-200 mb-4">Our most popular and highly-rated calculator tools.</p>
+                <ul class="text-gray-200 mb-6 space-y-2">
+                    <li><i class="fas fa-star mr-2 text-yellow-400"></i>Scientific Calculator</li>
+                    <li><i class="fas fa-star mr-2 text-yellow-400"></i>BMI Calculator</li>
+                    <li><i class="fas fa-star mr-2 text-yellow-400"></i>Currency Converter</li>
+                    <li><i class="fas fa-star mr-2 text-yellow-400"></i>Loan EMI Calculator</li>
+                    <li><i class="fas fa-star mr-2 text-yellow-400"></i>Age Calculator</li>
+                </ul>
+                <a href="./pages/featured-tools.html" class="inline-block bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold py-2 px-6 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300">View Featured</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-white text-center mb-12">Why Choose <span class="text-yellow-400">CalcHub</span>?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6">
+                    <div class="feature-icon accuracy-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Accurate Results</h3>
+                    <p class="text-gray-200">Our calculators provide precise and reliable results for all your calculations.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="feature-icon user-friendly-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">User-Friendly</h3>
+                    <p class="text-gray-200">Intuitive interfaces designed for ease of use across all devices.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="feature-icon responsive-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Mobile Responsive</h3>
+                    <p class="text-gray-200">Access our tools seamlessly on any device, anywhere, anytime.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="feature-icon free-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-white mb-2">Completely Free</h3>
+                    <p class="text-gray-200">All our calculators and tools are free to use with no hidden charges.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center mb-16">
+            <div class="bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 border border-white border-opacity-20 shadow-xl max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Start Calculating?</h2>
+                <p class="text-xl text-gray-200 mb-8">Explore our wide range of calculators and make your calculations easier and more efficient.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="./pages/mathematics.html" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-8 rounded-full hover:from-purple-700 hover:to-pink-700 transition-all duration-300">Explore Calculators</a>
+                    <a href="./pages/about.html" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-full hover:bg-white hover:bg-opacity-10 transition-all duration-300">Learn More</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/mohantohowlader/" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="./pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="./pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="./pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="./pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="./pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="./pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="./pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-300"><i class="fas fa-envelope mr-2 text-yellow-400"></i> contact@calchub.com</li>
+                        <li class="text-gray-300"><i class="fas fa-phone mr-2 text-yellow-400"></i> +1 (123) 456-7890</li>
+                        <li class="text-gray-300"><i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i> 123 Calculator St, Math City</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8 text-center">
+                <p class="text-gray-300">&copy; <span id="current-year"></span> CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./js/main.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+        const mobileDropdown = document.getElementById('mobile-dropdown');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileDropdownButton.addEventListener('click', () => {
+            mobileDropdown.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

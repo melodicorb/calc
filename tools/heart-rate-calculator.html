@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Rate Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/heart-rate-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-heartbeat text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Heart Rate <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate your maximum heart rate and target heart rate zones for optimal exercise intensity.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Your Details</h2>
+                    <form id="heart-rate-form" class="space-y-6">
+                        <!-- Age Input -->
+                        <div class="mb-4">
+                            <label for="age" class="block text-white mb-2">Age (years)</label>
+                            <input type="number" id="age" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter your age" required min="1" max="120" step="1">
+                        </div>
+                        
+                        <!-- Resting Heart Rate Input -->
+                        <div class="mb-4">
+                            <label for="resting-heart-rate" class="block text-white mb-2">Resting Heart Rate (bpm)</label>
+                            <input type="number" id="resting-heart-rate" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-400" placeholder="Enter your resting heart rate" min="30" max="120" step="1">
+                            <p class="text-yellow-100 text-sm mt-1">Optional: Measure your pulse when you wake up or after sitting quietly for 10 minutes</p>
+                        </div>
+                        
+                        <!-- Fitness Level Selection -->
+                        <div class="mb-4">
+                            <label for="fitness-level" class="block text-white mb-2">Fitness Level</label>
+                            <select id="fitness-level" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                                <option value="beginner" class="bg-purple-800 text-white">Beginner (New to exercise)</option>
+                                <option value="intermediate" selected class="bg-purple-800 text-white">Intermediate (Regular exercise 1-3 times/week)</option>
+                                <option value="advanced" class="bg-purple-800 text-white">Advanced (Regular exercise 4+ times/week)</option>
+                                <option value="athlete" class="bg-purple-800 text-white">Athlete (Competitive training)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Gender Selection -->
+                        <div class="mb-4">
+                            <label for="gender" class="block text-white mb-2">Gender (optional)</label>
+                            <select id="gender" class="w-full bg-white bg-opacity-30 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                                <option value="" class="bg-purple-800 text-white">Select gender</option>
+                                <option value="male" class="bg-purple-800 text-white">Male</option>
+                                <option value="female" class="bg-purple-800 text-white">Female</option>
+                                <option value="other" class="bg-purple-800 text-white">Other</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Formula Selection -->
+                        <div class="mb-4">
+                            <label class="block text-white mb-2 font-semibold">Calculation Method</label>
+                            <div class="space-y-2 bg-white bg-opacity-10 p-3 rounded-lg border border-white border-opacity-20">
+                                <label class="flex items-center">
+                                    <input type="radio" name="formula" value="traditional" checked class="mr-2 text-yellow-400 focus:ring-yellow-400">
+                                    <span class="text-white">Traditional (220 - Age)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="formula" value="tanaka" class="mr-2 text-yellow-400 focus:ring-yellow-400">
+                                    <span class="text-white">Tanaka (208 - 0.7 × Age)</span>
+                                </label>
+                                <label class="flex items-center">
+                                    <input type="radio" name="formula" value="karvonen" class="mr-2 text-yellow-400 focus:ring-yellow-400">
+                                    <span class="text-white">Karvonen (Uses resting heart rate)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Heart Rate Zones
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Your Heart Rate Results</h2>
+                    <div id="result" class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-30 min-h-[400px] shadow-md">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-heartbeat text-4xl text-yellow-300 mb-4"></i>
+                            <p class="text-white text-center font-medium">Enter your details to calculate your heart rate zones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Heart Rate Zones Chart -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Heart Rate Training Zones</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-white">
+                    <thead>
+                        <tr class="bg-purple-800 bg-opacity-70">
+                            <th class="px-4 py-3 text-left font-bold text-yellow-200">Zone</th>
+                            <th class="px-4 py-3 text-left font-bold text-yellow-200">Intensity (% of Max HR)</th>
+                            <th class="px-4 py-3 text-left font-bold text-yellow-200">Benefits</th>
+                            <th class="px-4 py-3 text-left font-bold text-yellow-200">Feels Like</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-purple-400 divide-opacity-30">
+                        <tr class="bg-purple-900 bg-opacity-40">
+                            <td class="px-4 py-3 font-medium">Zone 1: Recovery</td>
+                            <td class="px-4 py-3 text-yellow-100">50-60%</td>
+                            <td class="px-4 py-3">Improves overall health, helps recovery, builds endurance foundation</td>
+                            <td class="px-4 py-3">Very easy, conversational pace</td>
+                        </tr>
+                        <tr class="bg-purple-800 bg-opacity-40">
+                            <td class="px-4 py-3 font-medium">Zone 2: Endurance</td>
+                            <td class="px-4 py-3 text-yellow-100">60-70%</td>
+                            <td class="px-4 py-3">Improves basic endurance and fat burning</td>
+                            <td class="px-4 py-3">Easy, comfortable, conversational</td>
+                        </tr>
+                        <tr class="bg-purple-900 bg-opacity-40">
+                            <td class="px-4 py-3 font-medium">Zone 3: Aerobic</td>
+                            <td class="px-4 py-3 text-yellow-100">70-80%</td>
+                            <td class="px-4 py-3">Improves aerobic capacity and efficiency</td>
+                            <td class="px-4 py-3">Moderate, breathing becomes heavier</td>
+                        </tr>
+                        <tr class="bg-purple-800 bg-opacity-40">
+                            <td class="px-4 py-3 font-medium">Zone 4: Threshold</td>
+                            <td class="px-4 py-3 text-yellow-100">80-90%</td>
+                            <td class="px-4 py-3">Increases maximum performance capacity</td>
+                            <td class="px-4 py-3">Hard, difficult to speak in full sentences</td>
+                        </tr>
+                        <tr class="bg-purple-900 bg-opacity-40">
+                            <td class="px-4 py-3 font-medium">Zone 5: Maximum</td>
+                            <td class="px-4 py-3 text-yellow-100">90-100%</td>
+                            <td class="px-4 py-3">Develops maximum performance and speed</td>
+                            <td class="px-4 py-3">Very hard, short bursts, difficult to maintain</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-white mt-4 text-sm">Note: These zones are general guidelines. Individual responses to exercise intensity may vary.</p>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Heart Rate Training</h2>
+            
+            <div class="space-y-6 text-white">
+                <p>
+                    Heart rate training is a method of measuring exercise intensity based on your heart rate. By targeting specific heart rate zones, you can optimize your workouts for different fitness goals such as fat burning, endurance building, or performance improvement.
+                </p>
+                
+                <div class="bg-purple-900 bg-opacity-40 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-white mb-2">Maximum Heart Rate Formulas</h3>
+                    <p>
+                        Several formulas exist to estimate maximum heart rate:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong class="text-yellow-200">Traditional Formula:</strong> 220 - Age</li>
+                        <li><strong class="text-yellow-200">Tanaka Formula:</strong> 208 - (0.7 × Age)</li>
+                        <li><strong class="text-yellow-200">Karvonen Formula:</strong> Uses resting heart rate to calculate heart rate reserve</li>
+                    </ul>
+                    <p class="mt-2">
+                        These are estimates and actual maximum heart rate can vary between individuals. The most accurate way to determine your maximum heart rate is through a supervised exercise test.
+                    </p>
+                </div>
+                
+                <div class="bg-purple-900 bg-opacity-40 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-yellow-200 mb-2">Benefits of Heart Rate Training</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Provides objective measurement of exercise intensity</li>
+                        <li>Helps prevent overtraining and undertraining</li>
+                        <li>Allows for personalized workout plans</li>
+                        <li>Improves workout efficiency</li>
+                        <li>Helps track fitness progress over time</li>
+                        <li>Can be used for various fitness goals (weight loss, endurance, performance)</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-900 bg-opacity-40 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-yellow-200 mb-2">How to Measure Your Heart Rate</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li><strong class="text-yellow-200">Manual Pulse Check:</strong> Place two fingers (not your thumb) on your wrist or neck and count beats for 15 seconds, then multiply by 4</li>
+                        <li><strong class="text-yellow-200">Heart Rate Monitor:</strong> Chest straps, fitness watches, or smartphone apps can provide continuous monitoring</li>
+                        <li><strong class="text-yellow-200">Resting Heart Rate:</strong> Best measured first thing in the morning before getting out of bed</li>
+                    </ul>
+                    <p class="mt-2">
+                        For accurate resting heart rate, measure it in the morning after waking up, before getting out of bed. Take measurements over several days and calculate the average.
+                    </p>
+                </div>
+                
+                <div class="bg-purple-900 bg-opacity-40 p-4 rounded-lg border border-white border-opacity-20">
+                    <h3 class="text-xl font-semibold text-yellow-200 mb-2">Tips for Heart Rate Training</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Start with lower intensity zones and gradually progress</li>
+                        <li>Mix different heart rate zones throughout the week for balanced training</li>
+                        <li>Remember that medications, caffeine, stress, and temperature can affect heart rate</li>
+                        <li>Recheck your zones every few months as fitness improves</li>
+                        <li>Listen to your body - perceived exertion is also important</li>
+                    </ul>
+                    <p class="mt-2 text-yellow-400 font-bold">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> If you have any heart conditions or health concerns, consult with a healthcare professional before starting a new exercise program.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item bg-purple-900 bg-opacity-30 rounded-lg p-3 border border-white border-opacity-20">
+                    <div class="faq-question text-xl text-yellow-200 cursor-pointer flex justify-between items-center font-medium" onclick="toggleFAQ(this)">
+                        <span>Why does my maximum heart rate decrease with age?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Maximum heart rate decreases with age due to natural changes in the heart and cardiovascular system. As we age, the heart's maximum pumping capacity gradually decreases. This is why age is a factor in all maximum heart rate formulas. The decline is typically about 0.7-1 beat per minute per year after age 20.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Is it dangerous to exercise at maximum heart rate?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        For most healthy individuals, brief periods at or near maximum heart rate during high-intensity interval training can be beneficial. However, spending extended time at maximum heart rate can lead to excessive fatigue and increased risk of injury. For general fitness, it's usually recommended to stay in the 60-85% range of your maximum heart rate. If you have any health conditions, consult with a healthcare provider before attempting high-intensity exercise.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Which heart rate zone is best for fat burning?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        The "fat-burning zone" is typically around 60-70% of your maximum heart rate. At this moderate intensity, your body uses a higher percentage of fat for fuel compared to carbohydrates. However, higher intensity exercise (70-85%) burns more total calories overall, which can lead to greater fat loss in the long run. For optimal results, a mix of both moderate and higher intensity training is recommended.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How accurate are the heart rate formulas?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Heart rate formulas provide estimates that work reasonably well for the general population, but individual variation can be significant. Studies show that actual maximum heart rates can vary by ±10-15 beats per minute from the predicted values. The Tanaka formula (208 - 0.7 × Age) is generally considered more accurate than the traditional 220 - Age formula, especially for older adults. For the most accurate measurement, a supervised exercise stress test is recommended.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>What is heart rate reserve and why is it used?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-gray-200 mt-2 overflow-hidden" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Heart rate reserve (HRR) is the difference between your maximum heart rate and resting heart rate. The Karvonen formula uses HRR to calculate target heart rates by taking into account both your maximum and resting heart rates. This provides a more personalized approach since it factors in your current fitness level (indicated by your resting heart rate). As your fitness improves and resting heart rate decreases, your target heart rates will adjust accordingly, making it useful for tracking progress over time.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Newsletter</h3>
+                    <p class="text-gray-300 mb-4">Subscribe to our newsletter for updates and new calculators.</p>
+                    <form class="space-y-2">
+                        <input type="email" placeholder="Your email address" class="w-full bg-white bg-opacity-20 border border-white border-opacity-30 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                        <button type="submit" class="w-full bg-yellow-400 text-purple-900 font-semibold py-2 px-4 rounded-lg hover:bg-yellow-300 transition-all duration-300">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-white border-opacity-20 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownButton = document.getElementById('mobile-dropdown-button');
+            const mobileDropdown = document.getElementById('mobile-dropdown');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            mobileDropdownButton.addEventListener('click', function() {
+                mobileDropdown.classList.toggle('hidden');
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-chevron-down');
+                    icon.classList.toggle('fa-chevron-up');
+                }
+            });
+            
+            // Toggle FAQ answers
+            function toggleFAQ(element) {
+                const answer = element.nextElementSibling;
+                const icon = element.querySelector('i');
+                
+                if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    answer.style.maxHeight = '0px';
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            }
+        });
+        </script>
+    </body>
+</html>

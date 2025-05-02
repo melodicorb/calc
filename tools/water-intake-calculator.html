@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Intake Calculator - CalcHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/water-intake-calculator.js" defer></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-700 min-h-screen">
+    <!-- 3D Animated Background -->
+    <div class="background-animation"></div>
+
+    <!-- Header & Navigation -->
+    <header class="relative z-10">
+        <nav class="container mx-auto px-4 py-6">
+            <div class="flex justify-between items-center">
+                <a href="../index.html" class="text-white text-3xl font-bold flex items-center">
+                    <span class="text-yellow-400">Calc</span>Hub
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="text-white hover:text-yellow-400 transition">Home</a>
+                    <div class="relative group">
+                        <button class="text-white hover:text-yellow-400 transition">Calculators</button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="../pages/mathematics.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Mathematics</a>
+                            <a href="../pages/finance.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Finance</a>
+                            <a href="../pages/health.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100 bg-purple-50">Health</a>
+                            <a href="../pages/conversion.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Unit Conversion</a>
+                            <a href="../pages/utilities.html" class="block px-4 py-2 text-gray-800 hover:bg-purple-100">Other Utilities</a>
+                        </div>
+                    </div>
+                    <a href="../pages/about.html" class="text-white hover:text-yellow-400 transition">About Us</a>
+                    <a href="../pages/contact.html" class="text-white hover:text-yellow-400 transition">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-purple-800 mt-4 rounded-lg p-4 absolute left-0 right-0 mx-4 z-50">
+                <a href="../index.html" class="block text-white py-2 hover:text-yellow-400">Home</a>
+                <button id="mobile-dropdown-button" class="block text-white py-2 hover:text-yellow-400 w-full text-left flex justify-between items-center">
+                    Calculators <i class="fas fa-chevron-down"></i>
+                </button>
+                <div id="mobile-dropdown" class="hidden pl-4 mt-2">
+                    <a href="../pages/mathematics.html" class="block text-white py-2 hover:text-yellow-400">Mathematics</a>
+                    <a href="../pages/finance.html" class="block text-white py-2 hover:text-yellow-400">Finance</a>
+                    <a href="../pages/health.html" class="block text-white py-2 hover:text-yellow-400 text-yellow-400">Health</a>
+                    <a href="../pages/conversion.html" class="block text-white py-2 hover:text-yellow-400">Unit Conversion</a>
+                    <a href="../pages/utilities.html" class="block text-white py-2 hover:text-yellow-400">Other Utilities</a>
+                </div>
+                <a href="../pages/about.html" class="block text-white py-2 hover:text-yellow-400">About Us</a>
+                <a href="../pages/contact.html" class="block text-white py-2 hover:text-yellow-400">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12 relative z-10">
+        <section class="text-center mb-12">
+            <div class="h-24 w-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center transform transition-transform hover:scale-110 hover:rotate-12">
+                <i class="fas fa-tint text-4xl text-white"></i>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Water Intake <span class="text-yellow-400">Calculator</span></h1>
+            <p class="text-xl text-white max-w-3xl mx-auto">Calculate your recommended daily water intake based on your weight, activity level, and climate.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Enter Your Details</h2>
+                    <form id="water-intake-form" class="space-y-6">
+                        <div class="mb-6">
+                            <label class="block text-white mb-4">Unit System</label>
+                            <div class="flex space-x-4">
+                                <label class="flex items-center bg-white bg-opacity-10 px-4 py-2 rounded-lg border border-white border-opacity-50 hover:bg-opacity-20 transition-all">
+                                    <input type="radio" name="unit-system" value="metric" checked class="mr-2 text-blue-500 focus:ring-blue-500">
+                                    <span class="text-white font-medium">Metric (kg)</span>
+                                </label>
+                                <label class="flex items-center bg-white bg-opacity-10 px-4 py-2 rounded-lg border border-white border-opacity-50 hover:bg-opacity-20 transition-all">
+                                    <input type="radio" name="unit-system" value="imperial" class="mr-2 text-blue-500 focus:ring-blue-500">
+                                    <span class="text-white font-medium">Imperial (lbs)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Weight Input -->
+                        <div id="metric-weight" class="mb-4">
+                            <label for="weight-kg" class="block text-white mb-2 font-medium">Weight (kg)</label>
+                            <input type="number" id="weight-kg" class="w-full bg-white bg-opacity-10 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-inner" placeholder="Enter your weight in kilograms" required min="20" max="300" step="0.1">
+                        </div>
+                        
+                        <div id="imperial-weight" class="mb-4 hidden">
+                            <label for="weight-lbs" class="block text-white mb-2 font-medium">Weight (lbs)</label>
+                            <input type="number" id="weight-lbs" class="w-full bg-white bg-opacity-10 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-inner" placeholder="Enter your weight in pounds" required min="40" max="660" step="0.1">
+                        </div>
+                        
+                        <!-- Activity Level Selection -->
+                        <div class="mb-4">
+                            <label for="activity-level" class="block text-white mb-2 font-medium">Activity Level</label>
+                            <select id="activity-level" class="w-full bg-white bg-opacity-10 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-inner" required>
+                                <option value="" disabled selected class="bg-indigo-800 text-white">Select your activity level</option>
+                                <option value="sedentary" class="bg-indigo-800 text-white">Sedentary (little or no exercise)</option>
+                                <option value="light" class="bg-indigo-800 text-white">Lightly active (light exercise 1-3 days/week)</option>
+                                <option value="moderate" class="bg-indigo-800 text-white">Moderately active (moderate exercise 3-5 days/week)</option>
+                                <option value="very" class="bg-indigo-800 text-white">Very active (hard exercise 6-7 days/week)</option>
+                                <option value="extra" class="bg-indigo-800 text-white">Extra active (very hard exercise & physical job)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Climate Selection -->
+                        <div class="mb-4">
+                            <label for="climate" class="block text-white mb-2 font-medium">Climate</label>
+                            <select id="climate" class="w-full bg-white bg-opacity-10 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-inner" required>
+                                <option value="" disabled selected class="bg-indigo-800 text-white">Select your climate</option>
+                                <option value="cold" class="bg-indigo-800 text-white">Cold (below 50°F/10°C)</option>
+                                <option value="temperate" class="bg-indigo-800 text-white">Temperate (50-70°F/10-21°C)</option>
+                                <option value="warm" class="bg-indigo-800 text-white">Warm (70-85°F/21-30°C)</option>
+                                <option value="hot" class="bg-indigo-800 text-white">Hot (above 85°F/30°C)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Optional Inputs -->
+                        <div class="mb-4">
+                            <label for="age" class="block text-white mb-2 font-medium">Age (optional)</label>
+                            <input type="number" id="age" class="w-full bg-white bg-opacity-10 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-inner" placeholder="Enter your age" min="1" max="120" step="1">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="gender" class="block text-white mb-2 font-medium">Gender (optional)</label>
+                            <select id="gender" class="w-full bg-white bg-opacity-10 border border-white border-opacity-50 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-inner">
+                                <option value="" class="bg-indigo-800 text-white">Select gender</option>
+                                <option value="male" class="bg-indigo-800 text-white">Male</option>
+                                <option value="female" class="bg-indigo-800 text-white">Female</option>
+                                <option value="other" class="bg-indigo-800 text-white">Other</option>
+                            </select>
+                        </div>
+                        
+                        <button type="button" id="calculate-btn" class="w-full bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105">
+                            <i class="fas fa-calculator mr-2"></i> Calculate Water Intake
+                        </button>
+                        
+                        <button type="button" id="reset-btn" class="w-full bg-white bg-opacity-10 text-white font-semibold py-3 px-6 rounded-lg hover:bg-opacity-20 transition-all duration-300">
+                            <i class="fas fa-redo mr-2"></i> Reset
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Results -->
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Your Water Intake Results</h2>
+                    <div id="result" class="bg-white bg-opacity-10 rounded-lg p-6 border border-white border-opacity-30 min-h-[400px] shadow-lg">
+                        <div class="flex flex-col items-center justify-center h-full">
+                            <i class="fas fa-tint text-4xl text-blue-400 mb-4"></i>
+                            <p class="text-white text-center">Enter your details to calculate your recommended daily water intake</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Hydration Guide Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Hydration Guide</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-white">
+                    <thead>
+                        <tr class="bg-white bg-opacity-30">
+                            <th class="px-4 py-3 text-left font-bold">Hydration Level</th>
+                            <th class="px-4 py-3 text-left font-bold">Signs & Symptoms</th>
+                            <th class="px-4 py-3 text-left font-bold">Recommended Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white divide-opacity-20">
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3 font-medium">Optimal Hydration</td>
+                            <td class="px-4 py-3">Clear to light yellow urine, regular urination, moist mouth</td>
+                            <td class="px-4 py-3">Maintain current water intake</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-15">
+                            <td class="px-4 py-3 font-medium">Mild Dehydration</td>
+                            <td class="px-4 py-3">Dark yellow urine, thirst, dry mouth, headache</td>
+                            <td class="px-4 py-3">Increase water intake by 500ml-1L</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-10">
+                            <td class="px-4 py-3 font-medium">Moderate Dehydration</td>
+                            <td class="px-4 py-3">Amber urine, extreme thirst, fatigue, dizziness</td>
+                            <td class="px-4 py-3">Drink water immediately, consider electrolytes</td>
+                        </tr>
+                        <tr class="bg-white bg-opacity-15">
+                            <td class="px-4 py-3 font-medium">Severe Dehydration</td>
+                            <td class="px-4 py-3">Little to no urination, confusion, rapid heartbeat</td>
+                            <td class="px-4 py-3">Seek medical attention immediately</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-white mt-4 text-sm">Note: Urine color is one of the best indicators of your hydration status. Aim for pale yellow urine throughout the day.</p>
+        </section>
+        
+        <!-- Information Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">About Water Intake</h2>
+            
+            <div class="space-y-6 text-gray-200">
+                <p>
+                    Proper hydration is essential for overall health and wellbeing. Water makes up about 60% of the human body and is crucial for nearly every bodily function, from regulating temperature to removing waste.
+                </p>
+                
+                <div class="bg-white bg-opacity-15 p-4 rounded-lg border border-white border-opacity-30 shadow-md">
+                    <h3 class="text-xl font-semibold text-white mb-2">How Water Intake is Calculated</h3>
+                    <p class="text-white">
+                        The calculation for recommended water intake takes into account several factors:
+                    </p>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-white">
+                        <li>Body weight (heavier individuals need more water)</li>
+                        <li>Activity level (more active people need more water to replace what's lost through sweat)</li>
+                        <li>Climate (hot or dry environments increase water needs)</li>
+                        <li>Age and gender (can affect metabolic rate and water requirements)</li>
+                    </ul>
+                    <p class="mt-2 text-white">
+                        The base formula starts with your weight and adds adjustments for activity and climate factors.
+                    </p>
+                </div>
+                
+                <div class="bg-white bg-opacity-15 p-4 rounded-lg border border-white border-opacity-30 shadow-md">
+                    <h3 class="text-xl font-semibold text-white mb-2">Benefits of Proper Hydration</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-white">
+                        <li>Regulates body temperature</li>
+                        <li>Lubricates and cushions joints</li>
+                        <li>Protects sensitive tissues like the brain and spinal cord</li>
+                        <li>Helps remove waste through urination, perspiration, and bowel movements</li>
+                        <li>Aids in digestion and nutrient absorption</li>
+                        <li>Improves cognitive function and mood</li>
+                        <li>Enhances physical performance</li>
+                        <li>Helps maintain healthy skin</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white bg-opacity-15 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold text-white mb-2">Tips for Staying Hydrated</h3>
+                    <ul class="list-disc list-inside mt-2 space-y-1 text-white">
+                        <li>Carry a reusable water bottle with you throughout the day</li>
+                        <li>Set reminders to drink water regularly</li>
+                        <li>Drink a glass of water before each meal</li>
+                        <li>Eat water-rich foods like fruits and vegetables</li>
+                        <li>Flavor water with fruits or herbs if you find plain water boring</li>
+                        <li>Drink extra water during and after exercise</li>
+                        <li>Increase intake during hot weather or illness</li>
+                    </ul>
+                    <p class="mt-2 text-yellow-400 font-medium">
+                        <i class="fas fa-exclamation-triangle mr-2"></i> While rare, it is possible to drink too much water, which can lead to a condition called hyponatremia. Listen to your body and consult with healthcare professionals if you have specific health concerns.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-12 border border-white border-opacity-20 shadow-xl">
+            <h2 class="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Is the 8 glasses of water per day rule accurate?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden bg-white bg-opacity-15 p-3 rounded-lg border border-white border-opacity-20" style="max-height: 0; transition: max-height 0.3s ease;">
+                        The "8x8 rule" (eight 8-ounce glasses per day) is easy to remember but isn't based on solid scientific evidence. Water needs vary widely based on individual factors like weight, activity level, and climate. Our calculator provides a more personalized recommendation based on these factors. Some people may need more than 8 glasses, while others may need less.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Do other beverages count toward my daily water intake?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden bg-white bg-opacity-15 p-3 rounded-lg border border-white border-opacity-20" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Yes, all fluids contribute to your daily water intake, including tea, coffee, milk, and juice. However, water is the best choice as it contains no calories, sugar, or additives. Caffeinated beverages have a mild diuretic effect but still provide net hydration. Alcoholic beverages can contribute to dehydration and should not be counted toward your water intake goals.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>How do I know if I'm drinking enough water?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden bg-white bg-opacity-15 p-3 rounded-lg border border-white border-opacity-20" style="max-height: 0; transition: max-height 0.3s ease;">
+                        The color of your urine is one of the best indicators of hydration status. Pale yellow urine generally indicates good hydration, while dark yellow or amber urine suggests you need to drink more water. Other signs of adequate hydration include regular urination (about 4-7 times per day), moist mouth and lips, and minimal thirst. If you're rarely feeling thirsty and your urine is light in color, you're likely well-hydrated.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Should I drink more water when I'm sick?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden bg-white bg-opacity-15 p-3 rounded-lg border border-white border-opacity-20" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Yes, increasing your fluid intake when you're sick is generally recommended, especially if you have a fever, diarrhea, or vomiting, which can lead to fluid loss. Proper hydration helps your body fight infection and replace lost fluids. In addition to water, drinks with electrolytes may be beneficial when you're ill. However, if you have certain medical conditions like heart failure or kidney disease, consult with your healthcare provider about appropriate fluid intake when sick.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question text-xl text-white cursor-pointer flex justify-between items-center" onclick="toggleFAQ(this)">
+                        <span>Can drinking water help with weight loss?</span>
+                        <i class="fas fa-plus text-yellow-400"></i>
+                    </div>
+                    <div class="faq-answer text-white mt-2 overflow-hidden bg-white bg-opacity-15 p-3 rounded-lg border border-white border-opacity-20" style="max-height: 0; transition: max-height 0.3s ease;">
+                        Water can support weight loss in several ways. Drinking water before meals can help you feel fuller and potentially reduce calorie intake. Sometimes thirst is mistaken for hunger, so staying well-hydrated may prevent unnecessary snacking. Water also helps your body metabolize stored fat and eliminate waste products. Additionally, choosing water over high-calorie beverages like soda or juice can significantly reduce your overall calorie intake. However, drinking water alone won't lead to weight loss without other lifestyle changes.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-purple-900 bg-opacity-70 py-12 relative z-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">CalcHub</h3>
+                    <p class="text-gray-300 mb-4">Your all-in-one platform for interactive calculators and tools.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-yellow-400 transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-yellow-400 transition">Home</a></li>
+                        <li><a href="../pages/about.html" class="text-gray-300 hover:text-yellow-400 transition">About Us</a></li>
+                        <li><a href="../pages/contact.html" class="text-gray-300 hover:text-yellow-400 transition">Contact</a></li>
+                        <li><a href="../pages/privacy.html" class="text-gray-300 hover:text-yellow-400 transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Calculator Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../pages/mathematics.html" class="text-gray-300 hover:text-yellow-400 transition">Mathematics</a></li>
+                        <li><a href="../pages/finance.html" class="text-gray-300 hover:text-yellow-400 transition">Finance</a></li>
+                        <li><a href="../pages/health.html" class="text-gray-300 hover:text-yellow-400 transition">Health</a></li>
+                        <li><a href="../pages/conversion.html" class="text-gray-300 hover:text-yellow-400 transition">Unit Conversion</a></li>
+                        <li><a href="../pages/utilities.html" class="text-gray-300 hover:text-yellow-400 transition">Other Utilities</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">support@calchub.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-yellow-400 mt-1 mr-3"></i>
+                            <span class="text-gray-300">123 Calculator St, Math City, CA 90210</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-purple-800 pt-8">
+                <p class="text-center text-gray-400">&copy; 2023 CalcHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script>
+        // Toggle FAQ answers
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                answer.style.maxHeight = '0px';
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        }
+    </script>
+</body>
+</html>
